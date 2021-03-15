@@ -1,0 +1,624 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{etq.msj_clientes}</title>
+        <link rel="shortcut icon" href="managment/img/logo2.png" type="image/x-icon" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./managment/css/estiloProducto.css" />  
+    </h:head>
+    <h:body>
+        
+        <f:event type="preRenderView" listener="#{ingreso.verificarEmpleado()}"/>
+        <f:event type="preRenderView" listener="#{ingreso.usuariosDatos(false)}"/>
+        
+        <!--Encabezado con el logo que aparece cuando es responsive-->
+        <section id="logoo" style="text-align: center; background: rgb(255 255 255); border-bottom: 1px solid #dcdcdc; padding-top: 8px; padding-bottom: 8px;">
+            <img src="managment/img/logo.png" alt="" width="200" />
+        </section>
+
+        <!--Muestra del menú cuando es responsive-->
+        <section>
+            <div class="contenedor-menu2">
+                <ul class="menu2">
+                    <li><a href="#">
+                            <i class="fas fa-bars" style="margin-right: 20px;" />
+                            #{etq.msj_menu}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="empleado.xhtml"><i class="fas fa-home mr-2"></i>#{etq.msj_inicio}</a></li>
+                            <li><a href="inventariosE.xhtml"><i class="fas fa-folder mr-2"></i>#{etq.msj_inven}</a></li>
+                            <li><a href="fichas_produccionE.xhtml"><i class="fas fa-file-invoice mr-2"></i>#{etq.msj_fichaP}</a></li>
+                            <li><a href="satelitesE.xhtml"><i class="fas fa-industry mr-2"></i>#{etq.msj_satelite}</a></li>
+                            <li><a href="proveedoresE.xhtml"><i class="fas fa-truck-moving mr-2"></i>#{etq.msj_prov}</a></li>
+                            <li><a href="ordenes_produccionE.xhtml"><i class="fas fa-file-signature mr-2"></i>#{etq.msj_ordenProdu}</a></li>
+                            <li><a href="cotizacion_fichaE.xhtml"><i class="fas fa-file-invoice-dollar mr-2"></i>#{etq.msj_cotizaP}</a></li>
+                            <li><a href="ordenes_pagoE.xhtml"><i class="fas fa-dollar-sign mr-2"></i>#{etq.msj_ordenPago}</a></li>
+                            <li><a href="cotizacionE.xhtml"><i class="fas fa-money-check-alt mr-2"></i>#{etq.msj_cotiza}</a></li>
+                            <li><a href="clientesE.xhtml"><i class="fas fa-users mr-2"></i>#{etq.msj_clientes}</a></li>
+                            <li><h:form>
+                                    <h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                                        <i class="fas fa-power-off" style="margin-right: 13px"></i>#{etq.msj_cerrar}
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--Inicio del panel izquierdo, usando menú y submenu con Jquery-->
+
+        <section id="panel">
+            <div style="display: flex; justify-content: center; padding: 2px; border-bottom: 1px solid #e1e1e1;">
+                <img src="managment/img/logo.png" alt="logo" width="165" id="logo" /> 
+            </div>
+            <div class="contenedor-menu">
+                <ul class="menu2">                  
+                    <div class="sb-sidenav-menu-heading">Producción</div>
+                    <li>
+                        <a href="cotizaciones_fichaE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                                #{etq.msj_cotizaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ordenes_produccionE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                #{etq.msj_ordenProdu}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fichas_produccionE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                                #{etq.msj_fichaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="satelitesE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                #{etq.msj_satelite}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="proveedoresE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck-moving"></i></div>
+                                #{etq.msj_prov}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Inventario</div>
+                    <li>
+                        <a href="inventariosE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                #{etq.msj_inven}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productosE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tshirt"></i></div>
+                                #{etq.msj_product}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="insumosE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cut"></i></div>
+                                #{etq.msj_insumos}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Ventas</div>
+                    <li>
+                        <a href="ordenes_pagoE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
+                                #{etq.msj_ordenPago}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cotizacionE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                #{etq.msj_cotiza}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="clientesE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                #{etq.msj_clientes}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Otros</div>
+                    <li>
+                        <a href="#">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                #{etq.msj_reports}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="reportesInventariosE.xhtml">#{etq.msj_r1}</a></li>
+                            <li><a href="reportesProductosE.xhtml">#{etq.msj_r2}</a></li>
+                            <li><a href="reportesFichasE.xhtml">#{etq.msj_r3}</a></li>
+                            <li><a href="reportesCotizaciones_fichaE.xhtml">#{etq.msj_r4}</a> </li>
+                            <li><a href="reportesOrdenes_pagoE.xhtml">#{etq.msj_r5}</a></li>
+                            <li><a href="reportesCotizacionesE.xhtml">#{etq.msj_r6}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!--Encabezado simple-->
+        <header id="Encabezado">
+            <h:form><h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                    <i class="fas fa-power-off"></i></h:commandLink>
+            </h:form>
+            <a href="empleado.xhtml"><i class="fas fa-home"></i></a>
+            <a href="">#{etq.msj_empleado} #{ingreso.usuar.nomUsuario} #{ingreso.usuar.apellUsuario}</a>
+        </header>
+
+        <!--Segunda barra con titulo-->
+        <section id="barra2">
+            <div><h4 id="componente">#{etq.msj_clientes}</h4></div> 
+        </section>
+
+        <!--Tercera barra con titulo-->
+        <section id="barra3">
+            <div><h4 id="subtitulo">#{etq.msj_clie}</h4></div>
+        </section>
+
+        <section id="cuerpo1">
+            <div class="table-responsive">
+
+                <f:event type="preRenderView" listener="#{clientesBean.listar(false)}"/>  
+
+                <p:growl id="msj" sticky="true"/> 
+
+                <h:form id='frm'>
+                    <div style="display: flex; margin-top: 10px">
+                        <div style="width: 50%; margin-left: 0px">
+
+                        </div>
+                        <div style="display: flex; width: 50%; justify-content: flex-end; margin-right: 0px">
+                            <p:commandButton value="#{etq.msj_nuevoCliente}" oncomplete="PF('wdlgAgregar').show();"
+                                             actionListener="#{clientesBean.setAccion('Agregar Cliente')}"
+                                             update=":dlgAgregar" 
+                                             style="background: #28a745; color: #fff; font-size: 14px; margin-right: 10px;
+                                             font-weight: lighter; font-family: Roboto, sans-serif; padding: 1px; border: 1px solid #ccc;"/>                   
+
+                            <a href="correoClienteE.xhtml" style="text-decoration: none;  margin-right: 10px;">
+                                <img src="managment/img/email.png" width="30" />
+                            </a> 
+
+                            <h:commandLink style=' margin-right: 10px;'>
+                                <h:graphicImage url="managment/img/pdf.png" width="40"/>
+                                <p:dataExporter type="PDF" target="datos" fileName="#{etq.msj_clientes}"/>
+                            </h:commandLink>
+
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/excel.png" width="40"/>
+                                <p:dataExporter type="xls" target="datos" fileName="#{etq.msj_clientes}"/>
+                            </h:commandLink>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header" style="font-family: 'Mukta';">
+                            <i class="fas fa-table mr-1" style="color: #a8a8a8;"></i>
+                            Clientes registrados
+                        </div>
+                        <div class="card-body">
+                            <p:dataTable id="datos" value="#{clientesBean.lstClientes}" var="persona" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="8" style="font-size: 13px; text-align: center; padding: 10px">
+
+                                <p:column headerText="#{etq.msj_codigo}" footerText="#{etq.msj_codigo}">
+                                    <p:outputLabel value="#{persona.idCliente}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_nombre}" footerText="#{etq.msj_nombre}">
+                                    <p:outputLabel value="#{persona.nomCliente}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_apellido}" footerText="#{etq.msj_apellido}">
+                                    <p:outputLabel value="#{persona.apellCliente}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_telefono}" footerText="#{etq.msj_telefono}">
+                                    <p:outputLabel value="#{persona.telefCliente}"/>
+                                </p:column>
+
+                                <p:column headerText="Acciones">
+                                    <p:commandLink actionListener="#{clientesBean.ver(persona)}"
+                                                   oncomplete="PF('wdlgVer').show();"
+                                                   update=":dlgVer" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/eye.png" width="12"/>
+                                    </p:commandLink>
+                                    <p:commandLink actionListener="#{clientesBean.leerID(persona)}"
+                                                   oncomplete="PF('wdlgModificar').show();"
+                                                   update=":dlgModificar" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/edit.png" width="12"/>
+                                    </p:commandLink>
+                                    <p:commandLink oncomplete="PF('wdlgEliminar').show();" update=":formEliminar">
+                                        <f:setPropertyActionListener target="#{clientesBean.cliente}" value='#{persona}'/>
+                                        <p:graphicImage url="managment/img/close.png" width="12"/>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable> 
+                        </div>
+                    </div>
+                </h:form>
+
+
+                <!--Agregar cliente-->
+                <p:dialog header="#{clientesBean.accion}" widgetVar="wdlgAgregar" id="dlgAgregar" style='font-size: 14px'
+                          showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form enctype="multipart/form-data" style="margin: 15px; width: 800px; 
+                            font-family: Roboto, sans-serif; padding-bottom:40px;">
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>#{etq.msj_carga}</h5>
+                        </div>
+
+                        <h:inputFile value="#{clientesBean.excel}" 
+                                     style="font: bold 15px arial; color: #A19E9E; margin-right: 10px;" 
+                                     required="true" requiredMessage="No seleccionó archivo"/>
+
+                        <p:commandButton  ajax="false" value="#{etq.msj_migracion}" actionListener="#{clientesBean.migrar()}" 
+                                          update="msj" 
+                                          style="background: #8686d0; color: #fff; font-size: 14px; font-weight: lighter; margin-right: 20px"/>
+                    </h:form>
+
+
+                    <h:form style="margin: 15px; width: 800px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>
+                                Diligencie el formulario para ingresar un nuevo cliente
+                            </h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_codigo}:" style="margin-right: 40px; font-size: 14px"
+                                                   for="codigo"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="codigo" value="#{clientesBean.cliente.idCliente}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Código: No digitó el código" autocomplete="off" 
+                                                 validatorMessage="Código: El código deber ser igual o mayor a '1'" 
+                                                 converterMessage="Código: Ingrese solo valores númericos">
+                                        <f:validateLongRange minimum="1"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_fechNacim}:" 
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px" for="fecha"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:calendar locale="es" value="#{clientesBean.cliente.fechaNacimiento}" required="true" 
+                                                style="width:100%;" id="fecha" requiredMessage="Fecha: No digitó una fecha" 
+                                                autocomplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre}:" style="margin-right: 40px; font-size: 14px" for="nombre"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="nombre" value="#{clientesBean.cliente.nomCliente}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Nombre: No digitó el nombre" autocomplete="off" 
+                                                 converterMessage="Nombre: El nombre no debe llevar valores númericos"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_apellido}:" 
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px" for="apellido"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{clientesBean.cliente.apellCliente}" style="width:100%; font-size: 14px"
+                                                 id="apellido" required="true"
+                                                 requiredMessage="Apellido: No digitó el apellido" autocomplete="off"
+                                                 converterMessage="Apellido: El apellido no debe llevar valores númericos"/>
+                                </div> 
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_telefono}:" style="margin-right: 40px; font-size: 14px"
+                                                   for="telefono"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="telefono" value="#{clientesBean.cliente.telefCliente}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Télefono: No digitó un teléfono" 
+                                                 validatorMessage="Télefono: El número de teléfono debe tener 7 digitos"
+                                                 autocomplete="off" converterMessage="Teléfono: Ingrese solo valores númericos">
+                                        <f:validateLength minimum="7" maximum="7"/>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_corre}" for="correo"
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{clientesBean.cliente.correoCliente}" id="correo" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Correo: No digitó un correo" autocomplete="off" >
+                                        <f:validator validatorId="emailValidator"></f:validator>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel for="genero" value="#{etq.msj_genero}:" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="genero" value="#{clientesBean.cliente.generoCliente}"
+                                                     required="true" style="width:100%; font-size: 14px" 
+                                                     requiredMessage="Género: No seleccionó un género">
+                                        <f:selectItem itemValue="#{null}" itemLabel="#{etq.msj_seleccione}"/>  
+                                        <f:selectItem itemValue="Femenino" itemLabel="#{etq.msj_femenino}"/>
+                                        <f:selectItem itemValue="Masculino" itemLabel="#{etq.msj_masculino}"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="#{clientesBean.accion}" actionListener="#{clientesBean.operar()}"
+                                         oncomplete="PF('wdlgAgregar').hide();" 
+                                         update=":frm:datos :msj" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  font-weight: lighter;"/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgAgregar').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+
+                <!--Ver Cliente-->
+                <p:dialog header="Ver Cliente" widgetVar="wdlgVer" id="dlgVer" style='font-size: 14px' 
+                          showEffect="explode" hideEffect="explode" modal="true">                    
+
+                    <h:form style="margin: 15px; width: 700px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>
+                                Información del cliente
+                            </h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_codigo} " style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{clientesBean.cliente.idCliente}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre} "/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{clientesBean.cliente.nomCliente}"
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_apellido}" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{clientesBean.cliente.apellCliente}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_telefono}"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{clientesBean.cliente.telefCliente}"
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_corre}" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{clientesBean.cliente.correoCliente}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_fechNacim}"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{clientesBean.cliente.fechaNacimiento}"  
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_genero}" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{clientesBean.cliente.generoCliente}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="Cerrar" immediate="true" oncomplete="PF('wdlgVer').hide();"  
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px; font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog> 
+
+                <!--Modificar cliente-->
+                <p:dialog header="#{clientesBean.accion}" widgetVar="wdlgModificar" id="dlgModificar" style='font-size: 14px'
+                          showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form style="margin: 15px; width: 800px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>
+                                Modifique la información necesaria del cliente
+                            </h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_codigo}:" style="margin-right: 40px; font-size: 14px" for='codigo'/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:inputText value="#{clientesBean.cliente.idCliente}" style="width:100%; font-size: 14px"
+                                                 disabled="true" id='codigo'/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_fechNacim}:" style="margin-right: 33px; margin-left:10px; font-size: 14px"
+                                                   for='fecha'/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:calendar locale="es" value="#{clientesBean.cliente.fechaNacimiento}" required="true" 
+                                                style="width:100%;" disabled="true" id='fecha'/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre}:" style="margin-right: 40px; font-size: 14px" for='nombre'/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:inputText value="#{clientesBean.cliente.nomCliente}" style="width:100%; font-size: 14px" 
+                                                 disabled="true" id='nombre'/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_apellido}:" style="margin-right: 33px; margin-left:10px; font-size: 14px"
+                                                   for='apellido'/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:inputText value="#{clientesBean.cliente.apellCliente}" style="width:100%; font-size: 14px" 
+                                                 disabled="true" id='apellido'/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_telefono}:" style="margin-right: 40px; font-size: 14px" for='telefono'/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:inputText id='telefono' value="#{clientesBean.cliente.telefCliente}" style="width:100%; font-size: 14px" 
+                                                 required="true" requiredMessage="Télefono: No digitó un teléfono" 
+                                                 validatorMessage="Télefono: El número de teléfono debe tener 7 digitos"
+                                                 autocomplete="off" converterMessage="Teléfono: Ingrese solo valores númericos">
+                                        <f:validateLength minimum="7" maximum="7"/>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_corre}:" style="margin-right: 33px; margin-left:10px; font-size: 14px"
+                                                   for='correo'/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:inputText id='correo' value="#{clientesBean.cliente.correoCliente}" style="width:100%; font-size: 14px" 
+                                                 required="true" requiredMessage="Correo: No digitó un correo" autocomplete="off" >
+                                        <f:validator validatorId="emailValidator"></f:validator>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_genero}:" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:selectOneMenu id="genero" value="#{clientesBean.cliente.generoCliente}"
+                                                     required="true" style="width:100%; font-size: 14px" disabled="true">
+                                        <f:selectItem itemValue="#{etq.msj_seleccione}" itemLabel="#{etq.msj_seleccione}"/>  
+                                        <f:selectItem itemValue="Femenino" itemLabel="#{etq.msj_femenino}"/>
+                                        <f:selectItem itemValue="Masculino" itemLabel="#{etq.msj_masculino}"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="#{clientesBean.accion}" actionListener="#{clientesBean.operar()}"
+                                         oncomplete="PF('wdlgModificar').hide();" 
+                                         update=":frm:datos :msj" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  
+                                         font-weight: lighter; "/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgModificar').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; 
+                                         font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+                <!--Eliminar cliente-->
+                <h:form id="formEliminar">
+                    <p:dialog header="Eliminar registro" widgetVar="wdlgEliminar" id="dlgEliminar" 
+                              style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+                        <div style='display: flex; justify-content: center;'>
+                            <h:outputLabel value="¿Desea eliminar este registro?" style='font-size: 14px'/>
+                        </div>
+                        <div style='display: flex; justify-content: center;'>
+                            <p:commandButton value="SI" actionListener="#{clientesBean.eliminar()}"
+                                             update=":frm:datos :msj" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #28a745; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                            <p:commandButton value="NO" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #d63535; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                        </div>
+                    </p:dialog>  
+                </h:form>
+            </div>
+        </section>
+        <script src="managment/js/jquery.js"></script>
+    </h:body>  
+</html>

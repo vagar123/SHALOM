@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{etq.msj_ordenPago}</title>   
+        <link rel="shortcut icon" href="managment/img/logo2.png" type="image/x-icon" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./managment/css/estiloProducto.css" />  
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{ingreso.verificarAdmin()}"/>
+        <f:event type="preRenderView" listener="#{ingreso.usuariosDatos(false)}"/>
+
+        <!--Encabezado con el logo que aparece cuando es responsive-->
+        <section id="logoo" style="text-align: center; background: rgb(255 255 255); border-bottom: 1px solid #dcdcdc; padding-top: 8px; padding-bottom: 8px;">
+            <img src="managment/img/logo.png" alt="" width="200" />
+        </section>   
+
+        <!--Muestra del menú cuando es responsive-->
+        <section>
+            <div class="contenedor-menu2">
+                <ul class="menu2">
+                    <li><a href="#">
+                            <i class="fas fa-bars" style="margin-right: 20px;" />
+                            #{etq.msj_menu}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="admin.xhtml"><i class="fas fa-home mr-2"></i>#{etq.msj_inicio}</a></li>
+                            <li><a href="inventarios.xhtml"><i class="fas fa-folder mr-2"></i>#{etq.msj_inven}</a></li>
+                            <li><a href="fichas_produccion.xhtml"><i class="fas fa-file-invoice mr-2"></i>#{etq.msj_fichaP}</a></li>
+                            <li><a href="satelites.xhtml"><i class="fas fa-industry mr-2"></i>#{etq.msj_satelite}</a></li>
+                            <li><a href="proveedores.xhtml"><i class="fas fa-truck-moving mr-2"></i>#{etq.msj_prov}</a></li>
+                            <li><a href="ordenes_produccion.xhtml"><i class="fas fa-file-signature mr-2"></i>#{etq.msj_ordenProdu}</a></li>
+                            <li><a href="cotizacion_ficha.xhtml"><i class="fas fa-file-invoice-dollar mr-2"></i>#{etq.msj_cotizaP}</a></li>
+                            <li><a href="ordenes_pago.xhtml"><i class="fas fa-dollar-sign mr-2"></i>#{etq.msj_ordenPago}</a></li>
+                            <li><a href="cotizacion.xhtml"><i class="fas fa-money-check-alt mr-2"></i>#{etq.msj_cotiza}</a></li>
+                            <li><a href="clientes.xhtml"><i class="fas fa-users mr-2"></i>#{etq.msj_clientes}</a></li>
+                            <li><a href="usuarios.xhtml"><i class="fas fa-users-cog mr-2"></i>#{etq.msj_usuario}</a></li>
+                            <li><h:form>
+                                    <h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                                        <i class="fas fa-power-off" style="margin-right: 13px"></i>#{etq.msj_cerrar}
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--Inicio del panel izquierdo, usando menú y submenu con Jquery-->
+
+        <section id="panel">
+            <div style="display: flex; justify-content: center; padding: 2px; border-bottom: 1px solid #e1e1e1;">
+                <img src="managment/img/logo.png" alt="logo" width="165" id="logo" /> 
+            </div>
+            <div class="contenedor-menu">
+                <ul class="menu2">                  
+                    <div class="sb-sidenav-menu-heading">Producción</div>
+                    <li>
+                        <a href="cotizaciones_ficha.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                                #{etq.msj_cotizaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ordenes_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                #{etq.msj_ordenProdu}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fichas_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                                #{etq.msj_fichaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="satelites.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                #{etq.msj_satelite}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="proveedores.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck-moving"></i></div>
+                                #{etq.msj_prov}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Inventario</div>
+                    <li>
+                        <a href="inventarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                #{etq.msj_inven}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tshirt"></i></div>
+                                #{etq.msj_product}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="insumos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cut"></i></div>
+                                #{etq.msj_insumos}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Ventas</div>
+                    <li>
+                        <a href="ordenes_pago.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
+                                #{etq.msj_ordenPago}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cotizacion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                #{etq.msj_cotiza}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="clientes.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                #{etq.msj_clientes}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Otros</div>
+                    <li><a href="usuarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
+                                #{etq.msj_usuario}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                #{etq.msj_reports}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="reportesInventarios.xhtml">#{etq.msj_r1}</a></li>
+                            <li><a href="reportesProductos.xhtml">#{etq.msj_r2}</a></li>
+                            <li><a href="reportesFichas.xhtml">#{etq.msj_r3}</a></li>
+                            <li><a href="reportesCotizaciones_ficha.xhtml">#{etq.msj_r4}</a> </li>
+                            <li><a href="reportesOrdenes_pago.xhtml">#{etq.msj_r5}</a></li>
+                            <li><a href="reportesCotizaciones.xhtml">#{etq.msj_r6}</a></li>
+                            <li><a href="reportesUsuarios.xhtml">#{etq.msj_r7}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!--Encabezado simple-->
+        <header id="Encabezado">        
+            <h:form><h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                    <i class="fas fa-power-off"></i></h:commandLink>
+            </h:form>
+            <a href="admin.xhtml"><i class="fas fa-home"></i></a>
+            <a href="">#{etq.msj_admin} #{ingreso.usuar.nomUsuario} #{ingreso.usuar.apellUsuario}</a>
+        </header>
+
+        <!--Segunda barra con titulo-->
+        <section id="barra2">
+            <div><h4 id="componente">#{etq.msj_ordenPago}</h4></div> 
+        </section>
+
+
+        <!--Tercera barra con titulo-->
+        <section id="barra3">
+            <div><h4 id="subtitulo">#{etq.msj_ordenPagom1}</h4></div>
+        </section>
+
+        <!--Cuerpo de datos-->
+        <section id="cuerpo1">
+            <div class="table-responsive">
+
+                <f:event type="preRenderView" listener="#{ordenes_pagoBean.listar(false)}"/>
+                <f:event type="preRenderView" listener="#{productos_OrdenesBean.listar(false)}"/>
+
+                <p:growl id="msj" sticky="true"/>
+
+                <h:form enctype="multipart/form-data" id="imprimir">
+                    <div style="display: flex;">
+                        <div style="width: 85%">
+                            <h:selectOneMenu value="#{facturaReporte.idOrdenpago}" style="margin-right: 10px; border: 1px solid #ccc; 
+                                             padding: 5px; font-family: Arial,sans-serif; font-size: 14px; margin-top: 10px; width: 100%; 
+                                             color:#5F6264;" required="true" requiredMessage="No seleccionó orden de pago">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione Orden de pago" itemValue="#{null}"/>
+                                <f:selectItems value="#{ordenes_pagoBean.lstOrdenes_pago}" var="orden" 
+                                               itemLabel="#{orden.idOrdenpago}" itemValue="#{orden.idOrdenpago}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div style="width: 15%; display: flex; justify-content: flex-end">
+                            <p:commandButton ajax="false" id="reporte1" value="Imprimir" actionListener="#{facturaReporte.verReportePdf()}" 
+                                             style="margin-right: 10px; width:100px; font-size: 13px; background: #17a2b8; color: #fff;" update=":msj"/>
+                        </div>
+                    </div>
+                </h:form>
+                <h:form id='frm'>
+                    <div style="display: flex; margin-top: 10px">
+                        <div style="width: 60%; margin-left: 0px">
+                            <p:commandButton value="Ver detalle orden / factura" oncomplete="PF('wdlgDetalleOrden').show();"
+                                             update=":dlgDetalleOrden" style="background: #17a2b8; color: #fff; font-weight: lighter;
+                                             font-size: 14px; border: 1px solid #ccc; font-family: Roboto, sans-serif"/>
+
+                        </div>
+                        <div style="display: flex; width: 40%; justify-content: flex-end; margin-right: 0px">
+                            <button type="button" class="btn" style="background: #28a745">
+                                <a href="factura.xhtml" style="text-decoration: none; font-size: 14px; color: #fff; font-family: Roboto, sans-serif;">
+                                    Nueva orden de pago/factura
+                                </a>  
+                            </button>  
+                            
+                            <a href="reportesOrdenes_pago.xhtml" style="text-decoration: none; padding-right: 5px;padding-left: 5px;">
+                                <img src="managment/img/crecimiento.png" width="40" />
+                            </a>  
+
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/pdf.png" width="40"/>
+                                <p:dataExporter type="PDF" target="datos" fileName="#{etq.msj_ordenPago}"/>
+                            </h:commandLink>
+
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/excel.png" width="40"/>
+                                <p:dataExporter type="xls" target="datos" fileName="#{etq.msj_ordenPago}"/>
+                            </h:commandLink>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header" style="font-family: 'Mukta';">
+                            <i class="fas fa-table mr-1" style="color: #a8a8a8;"></i>
+                            Ordenes de pago registradas
+                        </div>
+                        <div class="card-body">
+                            <p:dataTable id="datos" value="#{ordenes_pagoBean.lstOrdenes_pago}" var="ordenp" 
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="8" style="font-size: 13px; text-align: center; padding: 10px">
+
+                                <p:column headerText="#{etq.msj_codigo}" footerText="#{etq.msj_codigo}">
+                                    <p:outputLabel value="#{ordenp.idOrdenpago}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_tipo}" footerText="#{etq.msj_tipo}">
+                                    <p:outputLabel value="#{ordenp.tipopagoOrdenpago}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_empleado}" footerText="#{etq.msj_empleado}">
+                                    <p:outputLabel value="#{ordenp.idUsuario}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_cliente}" footerText="#{etq.msj_cliente}">
+                                    <p:outputLabel value="#{ordenp.idCliente}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_fecha}" footerText="#{etq.msj_fecha}">
+                                    <p:outputLabel value="#{ordenp.fechaOrdenpago}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_precioTotal}" footerText="#{etq.msj_precioTotal}">
+                                    <p:outputLabel value="#{ordenp.valorTotalOrdenpago}"/>
+                                </p:column>
+
+                                <p:column headerText="Acciones">
+                                    <p:commandLink oncomplete="PF('wdlgEliminar').show();" update=":formEliminar">
+                                        <f:setPropertyActionListener target="#{ordenes_pagoBean.ordenpago}" value='#{ordenp}'/>
+                                        <p:graphicImage url="managment/img/close.png" width="12"/>
+                                    </p:commandLink>
+                                </p:column>
+
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </h:form>
+
+                <!--Eliminar orden-->
+                <h:form id="formEliminar">
+                    <p:dialog header="Eliminar registro" widgetVar="wdlgEliminar" id="dlgEliminar" 
+                              style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+                        <div style='display: flex; justify-content: center;'>
+                            <h:outputLabel value="¿Desea eliminar este registro?" style='font-size: 14px'/>
+                        </div>
+                        <div style='display: flex; justify-content: center;'>
+                            <p:commandButton value="SI" actionListener="#{ordenes_pagoBean.eliminar()}"
+                                             update=":frm:datos :msj :imprimir" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #28a745; color: #fff; font-family:lighter; 
+                                             font-family: Roboto, sans-serif'/> 
+
+                            <p:commandButton value="NO" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #d63535; color: #fff; font-family:lighter; 
+                                             font-family: Roboto, sans-serif'/> 
+                        </div>
+                    </p:dialog>  
+                </h:form>
+
+                <!--Tabla de detalle de las ordenes-->
+                <p:dialog header="Detalle de las ordenes / factura" widgetVar="wdlgDetalleOrden" 
+                          id="dlgDetalleOrden" 
+                          style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form id="formulario">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>
+                                Información detalle de las ordenes de pago / factura
+                            </h5>  
+                        </div>
+                        <p:dataTable id="tabla2" value="#{productos_OrdenesBean.lstOrden}" var="orden" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                     paginator="true" rows="5" 
+                                     style="font-size: 13px; text-align: center; padding: 20px; width:1100px">
+
+                            <p:column headerText="Orden" footerText="Orden">
+                                <p:outputLabel value="#{orden.idOrdenpago}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha" footerText="Fecha">
+                                <p:outputLabel value="#{orden.fechaOrdenpago}"/>
+                            </p:column>
+
+                            <p:column headerText="Tipo de pago"  footerText="Tipo de pago">
+                                <p:outputLabel value="#{orden.tipopagoOrdenpago}"/>
+                            </p:column>
+
+                            <p:column headerText="ID Cliente" footerText="ID Cliente">
+                                <p:outputLabel value="#{orden.idCliente}"/>
+                            </p:column>
+
+                            <p:column headerText="Cliente"  footerText="Cliente">
+                                <p:outputLabel value="#{orden.nomCliente} #{orden.apellCliente}"/>
+                            </p:column>
+
+                            <p:column headerText="ID Producto" footerText="ID Producto">
+                                <p:outputLabel value="#{orden.idProducto}"/>
+                            </p:column>
+
+                            <p:column headerText="Producto" footerText="Producto">
+                                <p:outputLabel value="#{orden.nomProducto}"/>
+                            </p:column>
+
+                            <p:column headerText="Talla" footerText="Talla">
+                                <p:outputLabel value="#{orden.idTalla}"/>
+                            </p:column>
+
+                            <p:column headerText="Cantidad" footerText="Cantidad">
+                                <p:outputLabel value="#{orden.cantidad}"/>
+                            </p:column>
+
+                            <p:column headerText="SubTotal" footerText="SubTotal">
+                                <p:outputLabel value="#{orden.total}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:dialog>
+            </div>
+        </section>
+    </h:body>
+    <script src="managment/js/jquery.js"></script>
+</html>

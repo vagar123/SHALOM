@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc77dcf3-ca0a-4b4d-81f5-f872c5d1fb17">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="estadoFicha_producc" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select fichas_produccion.idFicha_produccion, fichas_produccion.productFicha_producc, fichas_produccion.fechaIFicha_producc, 
+fichas_produccion.fechaSFicha_producc, satelites.idSatelite, satelites.nomSatelite 
+from fichas_produccion inner join satelites on
+fichas_produccion.idSatelite = satelites.idSatelite
+where fichas_produccion.estadoFicha_producc = $P{estadoFicha_producc};]]>
+	</queryString>
+	<field name="idFicha_produccion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla fichs_produccion, esta identifica todas las fichas de producción que se generen en el sistema de información en cuanto a una producción que se deba realizar.]]></fieldDescription>
+	</field>
+	<field name="productFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al producto que se realizará.]]></fieldDescription>
+	</field>
+	<field name="fechaIFicha_producc" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referencia a la fecha (año, mes, dia) en que inicia la producción planteada en la ficha de producción.]]></fieldDescription>
+	</field>
+	<field name="fechaSFicha_producc" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referencia a la fecha (año, mes, dia) en que termina la producción planteada en la ficha de producción.]]></fieldDescription>
+	</field>
+	<field name="idSatelite" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla satélites, esta identifica a los satélites que manejen en la empresa para la producción.]]></fieldDescription>
+	</field>
+	<field name="nomSatelite" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al nombre del satélite.]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="13" y="8" width="296" height="33" uuid="bccfe470-3641-4843-8c8b-16bd198173c9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Fichas de producción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="13" y="46" width="296" height="22" uuid="54c94a4d-1cd6-47ca-9900-99ef8ece6de1"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Fichas de producción no entregadas]]></text>
+			</staticText>
+			<image>
+				<reportElement x="309" y="-1" width="246" height="69" uuid="d4fbf67a-e3ad-4980-927b-522921a63467"/>
+				<imageExpression><![CDATA["C:\\Users\\User\\Documents\\Sena\\Vanessa\\Proyecto\\Shalom Codificacion\\SHALOM\\web\\managment\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="1456f96b-f181-444b-a449-aac537f75a78"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="92" height="15" uuid="06da23dd-0b96-4aa9-ab80-ef9cb0cccf24"/>
+				<text><![CDATA[Código ficha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="92" y="19" width="92" height="15" uuid="39e4fd4b-2cf6-42d6-8a0a-e346d6bde61b"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="184" y="19" width="92" height="15" uuid="93bb22ed-0efc-48d4-925d-847e490a61e1"/>
+				<text><![CDATA[Fecha Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="276" y="19" width="92" height="15" uuid="9b50e8d8-08ea-4d54-8aa1-03db2e3a21e2"/>
+				<text><![CDATA[Fecha Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="368" y="19" width="92" height="15" uuid="c51cccd6-4421-41be-a9a8-070a73f3aeac"/>
+				<text><![CDATA[Código satélite]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="460" y="19" width="92" height="15" uuid="47da3c73-9914-4ed0-b71a-d4ad0f3615f9"/>
+				<text><![CDATA[Satélite]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="50a162b3-03a3-4f0c-9f21-9c21f1f11c64"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="92" height="15" uuid="c645302d-70bd-4f88-a1d9-c5e809eb9c6f"/>
+				<textFieldExpression><![CDATA[$F{idFicha_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="92" y="0" width="92" height="15" uuid="cf605e37-f51c-4a7c-8f2f-30d6ce5def69"/>
+				<textFieldExpression><![CDATA[$F{productFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="184" y="0" width="92" height="15" uuid="49b51746-2129-49f7-8d64-06b6b9215dc5"/>
+				<textFieldExpression><![CDATA[$F{fechaIFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="276" y="0" width="92" height="15" uuid="cdeabe26-d640-4820-bbf3-a667a3778d55"/>
+				<textFieldExpression><![CDATA[$F{fechaSFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="368" y="0" width="92" height="15" uuid="fe5ab736-a948-4ee7-8208-06c84125027e"/>
+				<textFieldExpression><![CDATA[$F{idSatelite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="460" y="0" width="92" height="15" uuid="edff55b6-4082-4d23-b754-b3a468322312"/>
+				<textFieldExpression><![CDATA[$F{nomSatelite}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="edcaab27-b7e5-46fc-875e-6d6b5ab73388"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="9819abaa-83c8-4747-85e2-94113eed8b1c"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="346ccbf1-ca1d-43b3-b880-ce3496aeb8c4"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="02f5e6ba-b626-4b08-8c4d-4b156c842a47"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

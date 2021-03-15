@@ -1,0 +1,695 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{etq.msj_ordenProdu}</title>   
+        <link rel="shortcut icon" href="managment/img/logo2.png" type="image/x-icon" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./managment/css/estiloProducto.css" />  
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{ingreso.verificarAdmin()}"/>
+        <f:event type="preRenderView" listener="#{ingreso.usuariosDatos(false)}"/>
+
+        <!--Encabezado con el logo que aparece cuando es responsive-->
+        <section id="logoo" style="text-align: center; background: rgb(255 255 255); border-bottom: 1px solid #dcdcdc; padding-top: 8px; padding-bottom: 8px;">
+            <img src="managment/img/logo.png" alt="" width="200" />
+        </section>
+
+        <!--Muestra del menú cuando es responsive-->
+        <section>
+            <div class="contenedor-menu2">
+                <ul class="menu2">
+                    <li><a href="#">
+                            <i class="fas fa-bars" style="margin-right: 20px;" />
+                            #{etq.msj_menu}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="admin.xhtml"><i class="fas fa-home mr-2"></i>#{etq.msj_inicio}</a></li>
+                            <li><a href="inventarios.xhtml"><i class="fas fa-folder mr-2"></i>#{etq.msj_inven}</a></li>
+                            <li><a href="fichas_produccion.xhtml"><i class="fas fa-file-invoice mr-2"></i>#{etq.msj_fichaP}</a></li>
+                            <li><a href="satelites.xhtml"><i class="fas fa-industry mr-2"></i>#{etq.msj_satelite}</a></li>
+                            <li><a href="proveedores.xhtml"><i class="fas fa-truck-moving mr-2"></i>#{etq.msj_prov}</a></li>
+                            <li><a href="ordenes_produccion.xhtml"><i class="fas fa-file-signature mr-2"></i>#{etq.msj_ordenProdu}</a></li>
+                            <li><a href="cotizacion_ficha.xhtml"><i class="fas fa-file-invoice-dollar mr-2"></i>#{etq.msj_cotizaP}</a></li>
+                            <li><a href="ordenes_pago.xhtml"><i class="fas fa-dollar-sign mr-2"></i>#{etq.msj_ordenPago}</a></li>
+                            <li><a href="cotizacion.xhtml"><i class="fas fa-money-check-alt mr-2"></i>#{etq.msj_cotiza}</a></li>
+                            <li><a href="clientes.xhtml"><i class="fas fa-users mr-2"></i>#{etq.msj_clientes}</a></li>
+                            <li><a href="usuarios.xhtml"><i class="fas fa-users-cog mr-2"></i>#{etq.msj_usuario}</a></li>
+                            <li><h:form>
+                                    <h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                                        <i class="fas fa-power-off" style="margin-right: 13px"></i>#{etq.msj_cerrar}
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--Inicio del panel izquierdo, usando menú y submenu con Jquery-->
+
+        <section id="panel">
+            <div style="display: flex; justify-content: center; padding: 2px; border-bottom: 1px solid #e1e1e1;">
+                <img src="managment/img/logo.png" alt="logo" width="165" id="logo" /> 
+            </div>
+            <div class="contenedor-menu">
+                <ul class="menu2">                  
+                    <div class="sb-sidenav-menu-heading">Producción</div>
+                    <li>
+                        <a href="cotizaciones_ficha.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                                #{etq.msj_cotizaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ordenes_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                #{etq.msj_ordenProdu}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fichas_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                                #{etq.msj_fichaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="satelites.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                #{etq.msj_satelite}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="proveedores.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck-moving"></i></div>
+                                #{etq.msj_prov}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Inventario</div>
+                    <li>
+                        <a href="inventarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                #{etq.msj_inven}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tshirt"></i></div>
+                                #{etq.msj_product}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="insumos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cut"></i></div>
+                                #{etq.msj_insumos}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Ventas</div>
+                    <li>
+                        <a href="ordenes_pago.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
+                                #{etq.msj_ordenPago}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cotizacion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                #{etq.msj_cotiza}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="clientes.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                #{etq.msj_clientes}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Otros</div>
+                    <li><a href="usuarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
+                                #{etq.msj_usuario}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                #{etq.msj_reports}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="reportesInventarios.xhtml">#{etq.msj_r1}</a></li>
+                            <li><a href="reportesProductos.xhtml">#{etq.msj_r2}</a></li>
+                            <li><a href="reportesFichas.xhtml">#{etq.msj_r3}</a></li>
+                            <li><a href="reportesCotizaciones_ficha.xhtml">#{etq.msj_r4}</a> </li>
+                            <li><a href="reportesOrdenes_pago.xhtml">#{etq.msj_r5}</a></li>
+                            <li><a href="reportesCotizaciones.xhtml">#{etq.msj_r6}</a></li>
+                            <li><a href="reportesUsuarios.xhtml">#{etq.msj_r7}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!--Encabezado simple-->
+        <header id="Encabezado">        
+            <h:form><h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                    <i class="fas fa-power-off"></i></h:commandLink>
+            </h:form>
+            <a href="admin.xhtml"><i class="fas fa-home"></i></a>
+            <a href="">#{etq.msj_admin} #{ingreso.usuar.nomUsuario} #{ingreso.usuar.apellUsuario}</a>
+        </header>
+
+        <!--Segunda barra con titulo-->
+        <section id="barra2">
+            <div><h4 id="componente">#{etq.msj_ordenProdu}</h4></div> 
+        </section>
+
+
+        <!--Tercera barra con titulo-->
+        <section id="barra3">
+            <div><h4 id="subtitulo">#{etq.msj_ordenPr}</h4></div>
+        </section>
+
+        <section id="cuerpo1">
+            <div>
+
+                <f:event type="preRenderView" listener="#{ordenes_produccionBean.listar(false)}"/> 
+                <f:event type="preRenderView" listener="#{satelitesBean.listar(false)}"/>
+                <f:event type="preRenderView" listener="#{cotizaciones_FichaBean.listar(false)}"/> 
+                <f:event type="preRenderView" listener="#{productosBean.listar(false)}"/> 
+
+                <p:growl id="msj" sticky="true"/>
+
+                <h:form enctype="multipart/form-data" id="imprimir">
+                    <div style="display: flex;">
+                        <div style="width: 85%">
+                            <h:selectOneMenu value="#{orden_ProduccionReporte.idOrden_produccion}" style="margin-right: 10px; border: 1px solid #ccc; 
+                                             padding: 5px; font-family: Arial,sans-serif; font-size: 14px; margin-top: 10px; width: 100%; 
+                                             color:#5F6264;" required="true" requiredMessage="No seleccionó orden de producción">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione orden" itemValue="#{null}"/>
+                                <f:selectItems value="#{ordenes_produccionBean.lstOrdenes_produccion}" var="orden" 
+                                               itemLabel="#{orden.idOrden_produccion}" itemValue="#{orden.idOrden_produccion}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div style="width: 15%; display: flex; justify-content: flex-end">
+                            <p:commandButton ajax="false" id="reporte1" value="Imprimir" actionListener="#{orden_ProduccionReporte.verReportePdf()}" 
+                                             style="margin-right: 10px; width:100px; font-size: 13px; background: #17a2b8; color: #fff;" 
+                                             update=':msj'/>
+                        </div>
+                    </div>
+                </h:form>
+                <h:form id='frm'>
+                    <div style="display: flex; margin-top: 10px">
+                        <div style="display: flex; width: 100%; margin-right: 15px">
+                            <button type="button" class="btn" style="background: #28a745">
+                                <a href="nuevaOrden_Produccion.xhtml" style="text-decoration: none; font-size: 14px; color: #fff; font-family: Roboto, sans-serif;">
+                                    Nueva orden de producción
+                                </a> 
+                            </button>                      
+
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/pdf.png" width="40"/>
+                                <p:dataExporter type="PDF" target="datos" fileName="#{etq.msj_ordenProdu}"/>
+                            </h:commandLink>
+
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/excel.png" width="40"/>
+                                <p:dataExporter type="xls" target="datos" fileName="#{etq.msj_ordenProdu}"/>
+                            </h:commandLink>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header" style="font-family: 'Mukta';">
+                            <i class="fas fa-table mr-1" style="color: #a8a8a8;"></i>
+                            Ordenes de producción registrados
+                        </div>
+                        <div class="card-body">
+                            <p:dataTable id="datos" value="#{ordenes_produccionBean.lstOrdenes_produccion}" var="Ordenes_produccion" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="8" style="font-size: 13px; text-align: center; padding: 20px">
+
+                                <p:column headerText="#{etq.msj_codigo}" footerText="#{etq.msj_codigo}">
+                                    <p:outputLabel value="#{Ordenes_produccion.idOrden_produccion}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_producto}" footerText="#{etq.msj_producto}">
+                                    <p:outputLabel value="#{Ordenes_produccion.productoOrden_produccion}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_fecha}" footerText="#{etq.msj_fecha}">
+                                    <p:outputLabel value="#{Ordenes_produccion.fechaOrden_produccion}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_genero}" footerText="#{etq.msj_genero}">
+                                    <p:outputLabel value="#{Ordenes_produccion.generoProdOrden_produccion}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_talla}" footerText="#{etq.msj_talla}">
+                                    <p:outputLabel value="#{Ordenes_produccion.tallaOrden_produccion}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_sate}" footerText="#{etq.msj_sate}">
+                                    <p:outputLabel value="#{Ordenes_produccion.idSatelite}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_cotizacion}" footerText="#{etq.msj_cotizacion}">
+                                    <p:outputLabel value="#{Ordenes_produccion.idCotizacion_ficha}"/>
+                                </p:column>
+
+                                <p:column headerText="Acciones">
+                                    <p:commandLink actionListener="#{ordenes_produccionBean.ver(Ordenes_produccion)}"
+                                                   oncomplete="PF('wdlgVer').show();"
+                                                   update=":dlgVer" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/eye.png" width="12"/>
+                                    </p:commandLink>
+                                    <p:commandLink actionListener="#{ordenes_produccionBean.leerID(Ordenes_produccion)}"
+                                                   oncomplete="PF('wdlgModificar').show();"
+                                                   update=":dlgModificar" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/edit.png" width="12"/>
+                                    </p:commandLink>
+                                    <p:commandLink oncomplete="PF('wdlgEliminar').show();" update=":formEliminar">
+                                        <f:setPropertyActionListener target="#{ordenes_produccionBean.ordenes_produccion}" value='#{Ordenes_produccion}'/>
+                                        <p:graphicImage url="managment/img/close.png" width="12"/>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>   
+                        </div>
+                    </div>
+                </h:form>
+
+                <!--Ver orden de producción-->
+                <p:dialog header="Ver orden de producción" widgetVar="wdlgVer" id="dlgVer" style='font-size: 14px'
+                          showEffect="explode" hideEffect="explode" modal="true">
+                    <h:form style="margin: 15px; width: 600px; font-family: Roboto, sans-serif">
+                        <div style="background-color:#549abb; margin-bottom: 10px">
+                            <p style="color:white; padding: 5px">#{etq.msj_ordenProdDialog}</p>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_codigo} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.idOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_fecha} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.fechaOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_sate}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.idSatelite}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_cotizacion}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.idCotizacion_ficha}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background-color:#549abb; margin-bottom: 20px; margin-top: 20px;">
+                            <p style="color:white; padding: 5px">#{etq.msj_datosProdu}</p>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 100%; display:flex; margin-right: 10px">
+                                <div style="width: 25%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_producto} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 75.7%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.productoOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_genero} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.generoProdOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_talla} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.tallaOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_cantidad} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.cantidadOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_categoria}" style='font-size: 14px'/>                    
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.categoriaOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_color} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.colorOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_precioUni}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.valorUnitarioOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_descuento}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.descuentoOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_precioTotal}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.valorTotalOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 100%; display:flex; margin-right: 10px">
+                                <div style="width: 25%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_descripcion}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 75.7%">
+                                    <p:outputLabel value="#{ordenes_produccionBean.ordenes_produccion.descriOrden_produccion}" style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="Cerrar" immediate="true" oncomplete="PF('wdlgVer').hide();" 
+                                         style="background: #28a745; color: #fff; font-size: 14px; font-weight: lighter;"/>
+                    </h:form>
+                </p:dialog>
+
+                <!--Modificar orden de producción-->
+                <p:dialog header="#{ordenes_produccionBean.accion}" widgetVar="wdlgModificar" id="dlgModificar" style='font-size: 14px'
+                          showEffect="explode" hideEffect="explode" modal="true">
+                    <h:form style="margin: 15px; width: 700px; font-family: Roboto, sans-serif">
+                        <div style="background-color:#549abb; margin-bottom: 10px">
+                            <p style="color:white; padding: 5px">#{etq.msj_ordenProdDialog}</p>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%;">
+                                    <p:outputLabel value="#{etq.msj_codigo} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{ordenes_produccionBean.ordenes_produccion.idOrden_produccion}"
+                                                 style='font-size: 14px; width:100%;' disabled="true"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_fecha} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:calendar locale="es" value="#{ordenes_produccionBean.ordenes_produccion.fechaOrden_produccion}"
+                                                style='font-size: 14px;' disabled="true"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 25%;">
+                                    <p:outputLabel value="#{etq.msj_sate}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 75.7%;">
+                                    <p:selectOneMenu id="satelites" value="#{ordenes_produccionBean.ordenes_produccion.idSatelite}" 
+                                                     converter="omnifaces.SelectItemsConverter"
+                                                     style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaSate}">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione satélite" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{satelitesBean.lstSatelites}" var="satelite" itemLabel="#{satelite.idSatelite} - #{satelite.nomSatelite}" 
+                                                       itemValue="#{satelite.idSatelite}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 25%;">
+                                    <p:outputLabel value="#{etq.msj_cotizacion}" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 75.7%">
+                                    <p:selectOneMenu id="cotizacion" value="#{ordenes_produccionBean.ordenes_produccion.idCotizacion_ficha}" 
+                                                     converter="omnifaces.SelectItemsConverter" required="true" requiredMessage="#{etq.msj_validaCoti}"
+                                                     style='font-size: 14px; width:100%;'>
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione cotización" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{cotizaciones_FichaBean.lstCotizaciones_ficha}" var="coti" itemLabel="#{coti.idCotizacion_ficha} - #{coti.productoCotizacion_ficha} (#{coti.generoProdCotizacion_ficha})" 
+                                                       itemValue="#{coti.idCotizacion_ficha}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background-color:#549abb; margin-bottom: 10px; margin-top: 25px;">
+                            <p style="color:white; padding: 5px">#{etq.msj_datosProdu}</p>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 25%;">
+                                    <p:outputLabel value="#{etq.msj_producto} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 75.7%;">
+                                    <p:selectOneMenu id="producto" value="#{ordenes_produccionBean.ordenes_produccion.productoOrden_produccion}" 
+                                                     converter="omnifaces.SelectItemsConverter"
+                                                     style='font-size: 14px; width:100%;' disabled="true">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione producto" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{productosBean.lstProductos}" var="pro" itemLabel="#{pro.descriProducto} (#{pro.generoProducto})" 
+                                                       itemValue="#{pro.nomProducto}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%;">
+                                    <p:outputLabel value="#{etq.msj_genero} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="genero" value="#{ordenes_produccionBean.ordenes_produccion.generoProdOrden_produccion}"
+                                                     style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaGenero}">
+                                        <f:selectItem itemValue="#{null}" itemLabel="Seleccione género"/>  
+                                        <f:selectItem itemValue="Femenino" itemLabel="Femenino"/>
+                                        <f:selectItem itemValue="Masculino" itemLabel="Masculino"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_talla} " style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:selectOneMenu id="talla" value="#{ordenes_produccionBean.ordenes_produccion.tallaOrden_produccion}"
+                                                     style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaTalla}">
+                                        <f:selectItem itemValue="#{null}" itemLabel="Seleccione talla"/>  
+                                        <f:selectItem itemValue="XS" itemLabel="XS"/>
+                                        <f:selectItem itemValue="S" itemLabel="S"/>
+                                        <f:selectItem itemValue="M" itemLabel="M"/>
+                                        <f:selectItem itemValue="L" itemLabel="L"/>
+                                        <f:selectItem itemValue="XL" itemLabel="XL"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%;">
+                                    <p:outputLabel value="#{etq.msj_cantidad} "/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{ordenes_produccionBean.ordenes_produccion.cantidadOrden_produccion}" 
+                                                 style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaCantidad1}"
+                                                 autocomplete="off" 
+                                                 validatorMessage="#{etq.msj_validaCantidad2}" 
+                                                 converterMessage="#{etq.msj_converCantidad}">
+                                        <f:validateLongRange minimum="1"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_categoria}"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:selectOneMenu id="categoria" value="#{ordenes_produccionBean.ordenes_produccion.categoriaOrden_produccion}"
+                                                     style='font-size: 14px; width:100%;' disabled="true">
+                                        <f:selectItem itemValue="#{null}" itemLabel="Seleccione categoria"/>  
+                                        <f:selectItem itemValue="Uniformes" itemLabel="Uniformes"/>
+                                        <f:selectItem itemValue="Dotaciones" itemLabel="Dotaciones"/>
+                                        <f:selectItem itemValue="Formal" itemLabel="Formal"/>
+                                        <f:selectItem itemValue="Informal" itemLabel="Informal"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%;">
+                                    <p:outputLabel value="#{etq.msj_color} "/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{ordenes_produccionBean.ordenes_produccion.colorOrden_produccion}" 
+                                                 style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaColor}"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_precioUni}"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:inputText value="#{ordenes_produccionBean.ordenes_produccion.valorUnitarioOrden_produccion}" 
+                                                 style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaPrecio1}"
+                                                 autocomplete="off" 
+                                                 validatorMessage="#{etq.msj_validaPrecio2}" 
+                                                 converterMessage="#{etq.msj_converPrecio}">
+                                        <f:validateLongRange minimum="1000"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%;">
+                                    <p:outputLabel value="#{etq.msj_descuento}"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{ordenes_produccionBean.ordenes_produccion.descuentoOrden_produccion}" 
+                                                 style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaDescuento}"
+                                                 autocomplete="off" 
+                                                 validatorMessage="#{etq.msj_validaDescuento2}" 
+                                                 converterMessage="#{etq.msj_converDescuento}">
+                                        <f:validateLongRange minimum="0"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_precioTotal}"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:inputText value="#{ordenes_produccionBean.ordenes_produccion.valorTotalOrden_produccion}" 
+                                                 style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaTotal}"
+                                                 autocomplete="off" 
+                                                 validatorMessage="#{etq.msj_validaTotal2}" 
+                                                 converterMessage="#{etq.msj_converTotal}">
+                                        <f:validateLongRange minimum="1000"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 15px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 25%;">
+                                    <p:outputLabel value="#{etq.msj_descripcion}"/>
+                                </div>
+                                <div style="width: 75.7%;">
+                                    <p:inputText value="#{ordenes_produccionBean.ordenes_produccion.descriOrden_produccion}" 
+                                                 style='font-size: 14px; width:100%;' required="true" requiredMessage="#{etq.msj_validaDesc}"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="#{ordenes_produccionBean.accion}" 
+                                         actionListener="#{ordenes_produccionBean.operar()}" 
+                                         oncomplete="PF('wdlgModificar').hide();" 
+                                         update=":frm:datos :msj :imprimir" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  
+                                         font-weight: lighter;"/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgModificar').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; 
+                                         font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+
+                <!--Eliminar orden de producción-->
+                <h:form id="formEliminar">
+                    <p:dialog header="Eliminar registro" widgetVar="wdlgEliminar" id="dlgEliminar" 
+                              style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+                        <div style='display: flex; justify-content: center;'>
+                            <h:outputLabel value="¿Desea eliminar este registro?" style='font-size: 14px'/>
+                        </div>
+                        <div style='display: flex; justify-content: center;'>
+                            <p:commandButton value="SI" actionListener="#{ordenes_produccionBean.eliminar()}"
+                                             update=":frm:datos :msj" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #28a745; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                            <p:commandButton value="NO" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #d63535; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                        </div>
+                    </p:dialog>  
+                </h:form>
+            </div>
+        </section>
+    </h:body>
+    <script src="managment/js/jquery.js"></script>
+</html>
+

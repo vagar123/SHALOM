@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc8552e2-8cad-40e0-beff-2d8eacadd110">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="productoCotizacion_ficha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT cotizaciones_fichas.fechaCotizacion_ficha, cotizaciones_fichas.idCotizacion_ficha, cotizaciones_fichas.productoCotizacion_ficha, 
+cotizaciones_fichas.generoProdCotizacion_ficha, cotizaciones_fichas.cantidadCotizacion_ficha, 
+cotizaciones_fichas.tallaProduCotizacion_ficha, cotizaciones_fichas.descriCoti_ficha
+FROM cotizaciones_fichas 
+where cotizaciones_fichas.productoCotizacion_ficha = $P{productoCotizacion_ficha};]]>
+	</queryString>
+	<field name="fechaCotizacion_ficha" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referencia a la fecha (año, mes, dia) en que se realiza la cotización.]]></fieldDescription>
+	</field>
+	<field name="idCotizacion_ficha" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla cotizaciones_fichas, esta identifica todas las cotización que se generen en el sistema  de información en cuanto a una producción que se deba realizar.]]></fieldDescription>
+	</field>
+	<field name="productoCotizacion_ficha" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al producto que se vaya a cotizar y que posteriormente se producirá.]]></fieldDescription>
+	</field>
+	<field name="generoProdCotizacion_ficha" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a que género (Femenino o Masculino) vaya dirigido el producto.]]></fieldDescription>
+	</field>
+	<field name="cantidadCotizacion_ficha" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Hace referencia a la cantidad que se realizará del producto.]]></fieldDescription>
+	</field>
+	<field name="tallaProduCotizacion_ficha" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a la talla o el tamaño del producto (XS, S, M, L, XL).]]></fieldDescription>
+	</field>
+	<field name="descriCoti_ficha" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="339" height="33" uuid="f1020dee-7746-4aa6-a48d-14b93d447536"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Cotizaciones de producción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="145" y="46" width="194" height="22" uuid="d25292a4-0b07-4320-86eb-ed1c218b1d8d"/>
+				<text><![CDATA[Agrupado por productos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="364" y="-1" width="191" height="69" uuid="580c5c05-c162-4d44-b17a-6fc4d2eb8f58"/>
+				<imageExpression><![CDATA["C:\\Users\\User\\Documents\\Sena\\Vanessa\\Proyecto\\Shalom Codificacion\\SHALOM\\web\\managment\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="2ae03cfe-77c1-4b0c-a2fe-46b57a8aa8b8"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="111" height="15" uuid="11f6b38d-cf95-45e5-b1a6-282ad71a7928"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="19" width="60" height="15" uuid="10b20969-b63b-4cbe-8ee3-e930da5c340f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="171" y="19" width="102" height="15" uuid="88023571-ca73-4a16-9b86-6572985475d4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="273" y="19" width="66" height="15" uuid="64f57037-bd69-4116-ac85-524e99e081c2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Género]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="339" y="19" width="58" height="15" uuid="1af2dc8a-303a-4fb1-8cac-45b4ecfee34d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="397" y="19" width="47" height="15" uuid="d506fb0b-bc02-41b2-a79c-c4a62920c2e8"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Talla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="19" width="109" height="15" uuid="2727c967-bc80-474a-a4bd-6ac19531bc7f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="23" width="555" height="1" uuid="b0d11f15-e04c-4359-adcd-6c6ffe192611"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="111" height="23" uuid="4654213d-5f87-4a43-afb4-38f249cb2c4b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaCotizacion_ficha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="171" y="0" width="102" height="23" uuid="cda39679-d4da-4d0a-ba6f-fb3171e95b64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{productoCotizacion_ficha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="273" y="0" width="66" height="24" uuid="6f9c8394-9452-43cc-a777-3011ee9b1283"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{generoProdCotizacion_ficha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="339" y="0" width="58" height="24" uuid="0faf087f-fc02-4c41-9293-fb3c0642a435"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidadCotizacion_ficha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="111" y="0" width="60" height="23" uuid="905f1a0d-6046-4dfc-b345-185569653d3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idCotizacion_ficha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="47" height="24" uuid="e32365e6-e2f5-4c8a-b64f-5a14999599db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tallaProduCotizacion_ficha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="109" height="23" uuid="88ba563b-fb7b-4f66-8f70-14162acf9207"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descriCoti_ficha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="2f160bdf-2a22-45eb-a609-00cc7ce32c9f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="0ec6f752-9f57-48f8-a9f4-d380c4033942"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="8cd8360d-f6fb-4d1c-82b6-a08690f1fba2"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="200459d8-caad-494b-8f7f-54cb2dd8736e"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cb2a6cd6-4301-41cb-919d-644c400d36c0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="fechaOrdenpago" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="categoriaProducto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select ordenes_pago.idOrdenpago, ordenes_pago.fechaOrdenpago, ordenes_pago.tipopagoOrdenpago, 
+concat(clientes.nomCliente," ",clientes.apellCliente), ordenes_pago.valorTotalOrdenpago, 
+productos_ordenes.cantidad, productos.nomProducto
+from clientes inner join ordenes_pago
+on clientes.idCliente = ordenes_pago.idCliente
+inner join productos_ordenes
+on ordenes_pago.idOrdenpago = productos_ordenes.idOrdenpago
+inner join productos 
+on productos_ordenes.idProducto = productos.idProducto
+where monthname(ordenes_pago.fechaOrdenpago) = $P{fechaOrdenpago} and productos.categoriaProducto = $P{categoriaProducto};]]>
+	</queryString>
+	<field name="idOrdenpago" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla ordenes de pago, esta identifica las ordenes de pago (facturas) que son generadas en el sistema de información.]]></fieldDescription>
+	</field>
+	<field name="fechaOrdenpago" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referencia a la fecha (año, mes, dia) en que se realiza la orden de pago.]]></fieldDescription>
+	</field>
+	<field name="tipopagoOrdenpago" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al método de pago que drealiza el cliente al momento de la compra de los productos.]]></fieldDescription>
+	</field>
+	<field name="concat(clientes.nomCliente,&quot; &quot;,clientes.apellCliente)" class="java.lang.String"/>
+	<field name="valorTotalOrdenpago" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Hace referencia a la sumatoria total en la compra de los productos.]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Hace referencia a la cantidad que se realizará del producto.]]></fieldDescription>
+	</field>
+	<field name="nomProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al nombre del producto.]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="14" y="13" width="260" height="33" uuid="259207c5-36ff-43ab-a682-8a2541d376ba"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="25" y="46" width="249" height="22" uuid="d046d731-dbd9-4688-aff6-b4813cc15a93"/>
+				<text><![CDATA[Agrupado por mes y categoria]]></text>
+			</staticText>
+			<image>
+				<reportElement x="300" y="-1" width="253" height="69" uuid="17f47b83-3c71-4f11-a5c0-c462fc0335c9"/>
+				<imageExpression><![CDATA["C:\\Users\\User\\Documents\\Sena\\Vanessa\\Proyecto\\Shalom Codificacion\\SHALOM\\web\\managment\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="dfa39f65-f8d5-46b4-bfef-f5709eed264c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="49" height="15" uuid="4fbd38cd-82fa-4c11-9fff-da98a44ad886"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="49" y="19" width="93" height="15" uuid="223ca6fc-cf4f-4805-8fdf-44e0dfab048a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="142" y="19" width="68" height="15" uuid="e8db455f-28b1-41ac-bac0-093a6d53cd97"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[T.Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="210" y="19" width="106" height="15" uuid="52855847-aef9-4269-8a34-08034ccb9ccc"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="316" y="19" width="58" height="15" uuid="5a7ed470-d7a9-4cb8-b155-195d0ace915c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[V.Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="374" y="19" width="71" height="15" uuid="72111573-2e69-48cd-8211-f077b84e091d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="445" y="19" width="108" height="15" uuid="4422d922-d1f2-4f1d-996b-aa43b821f4eb"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="-2" y="26" width="555" height="1" uuid="7026093a-48b4-417e-b822-70ce5a789ba5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="49" height="26" uuid="318f3e23-793d-4e55-a754-5c6d441df1e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idOrdenpago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="49" y="0" width="93" height="26" uuid="099d06f6-259d-4e10-bc43-f73adc2c0440"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaOrdenpago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="142" y="0" width="68" height="26" uuid="be62a074-0c67-4d9e-a7c3-8890e2f51abe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipopagoOrdenpago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="210" y="0" width="106" height="26" uuid="d930e817-44e0-40d3-997a-384e7dce8604"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{concat(clientes.nomCliente," ",clientes.apellCliente)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="316" y="0" width="58" height="26" uuid="1bfdce2e-cb5e-483a-822a-fb442cae9f81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorTotalOrdenpago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="374" y="0" width="71" height="26" uuid="b871b11e-ddee-4942-ba32-c4fe9f458c63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="445" y="0" width="108" height="26" uuid="1fca2c98-e95a-4e07-8848-eac0980cef68"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomProducto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="817a5e89-bc6c-47c6-95d1-e1909782f9b0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="88d954c1-36f3-4fa6-8d8f-23be5b72b0aa"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="4ada107b-3981-4049-a87f-26aa357c0d20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="7aaec8cd-9ce6-4429-82be-25dd8cbc04f3"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

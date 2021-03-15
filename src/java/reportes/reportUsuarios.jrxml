@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b4f107a-f7de-42c5-9fca-44f28d6680e2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[select usuarios.idUsuario, concat(usuarios.nomUsuario," ",usuarios.apellUsuario), 
+count(ordenes_pago.idOrdenpago), sum(ordenes_pago.valorTotalOrdenpago), 
+sum(cotizaciones.valortotalCotizacion)
+from usuarios inner join ordenes_pago 
+on usuarios.idUsuario = ordenes_pago.idUsuario
+inner join clientes
+on ordenes_pago.idCliente = clientes.idCliente
+inner join cotizaciones
+on clientes.idCliente = cotizaciones.idCliente group by usuarios.idUsuario;]]>
+	</queryString>
+	<field name="idUsuario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla usuarios, hace referencia al número único de identificación (Cédula) que posee cada usuario.]]></fieldDescription>
+	</field>
+	<field name="concat(usuarios.nomUsuario,&quot; &quot;,usuarios.apellUsuario)" class="java.lang.String"/>
+	<field name="count(ordenes_pago.idOrdenpago)" class="java.lang.Long"/>
+	<field name="sum(ordenes_pago.valorTotalOrdenpago)" class="java.math.BigDecimal"/>
+	<field name="sum(cotizaciones.valortotalCotizacion)" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="11" y="13" width="263" height="33" uuid="46a08914-65b1-4549-8630-6aa63e783683"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Empleados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="87" y="46" width="187" height="22" uuid="71bb5595-328d-45f1-9709-a4c884dd2a37"/>
+				<text><![CDATA[Ventas y cotizaciones]]></text>
+			</staticText>
+			<image>
+				<reportElement x="299" y="-1" width="254" height="69" uuid="5d2a1647-aa31-4af2-a4e8-31cac705a984"/>
+				<imageExpression><![CDATA["C:\\Users\\User\\Documents\\Sena\\Vanessa\\Proyecto\\Shalom Codificacion\\SHALOM\\web\\managment\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="6345cc54-4c07-4842-a949-ac179b9139d3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="87" height="15" uuid="e07bcbc5-c999-4f49-9250-0646a1d3f964"/>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="87" y="19" width="152" height="15" uuid="8762090d-16ac-408a-8411-f9e65591aeec"/>
+				<text><![CDATA[Empleado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="239" y="19" width="94" height="15" uuid="0f95b9fe-81f5-4beb-a5e7-c602334b0abc"/>
+				<text><![CDATA[N° Ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="333" y="19" width="111" height="15" uuid="50a44647-140f-4fad-88e1-61910bdbfb89"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="19" width="111" height="15" uuid="13077578-be2d-4bc6-9513-9a915a7cd6f7"/>
+				<text><![CDATA[Restantes]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="abca2d88-7a79-4046-be5b-326ffb65ebb9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="1" width="87" height="15" uuid="cf97d3ea-390b-4b13-9a8b-891833158807"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idUsuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="0" width="152" height="16" uuid="ac532523-e9e9-41ae-b7f4-0798b0b06380"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{concat(usuarios.nomUsuario," ",usuarios.apellUsuario)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="1" width="94" height="14" uuid="ee5015ca-4252-47e0-a66d-ae21430f19d5"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{count(ordenes_pago.idOrdenpago)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="1" width="111" height="14" uuid="29dfe53e-d267-4f69-a7d8-260d1518f8fa"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum(ordenes_pago.valorTotalOrdenpago)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="1" width="109" height="15" uuid="ddcc5ee2-4316-4364-b69a-220ded1653e3"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum(cotizaciones.valortotalCotizacion)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="912a0a58-7299-4fb3-a068-8495d9a181ed"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="41a38386-6085-4e59-b08f-b6c094e84363"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="3151a07c-426d-4f43-95c5-8e08cb7e9aeb"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="16a256c6-3b7d-425d-a593-ecb94a946454"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

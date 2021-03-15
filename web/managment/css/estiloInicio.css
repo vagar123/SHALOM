@@ -1,0 +1,320 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: 'Raleway';
+    background-color: #f2f2f2;
+}
+
+header{
+    width: 100%;
+    height: 45px;
+    background: #6586d3;  
+    border-bottom: 1px solid #cccccc;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header a{
+    font-family: 'Mukta';
+    text-decoration: none;
+    color:#ffffff;
+    font-size: 16px;
+    height: 59px;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.contenedor{
+    display: flex;
+    width: 100%;
+}
+
+.text{
+    width: 80%;
+    padding: 10px;
+}
+
+h1{
+    font-family: 'Syne', sans-serif;
+    font-size: 33px;
+    color:#0f3561;
+    margin-top: 100px;
+    text-align: center;
+}
+
+h2{
+    font-family: 'Mukta', sans-serif;
+    font-size: 22px;
+    color:#0f3561;
+    margin-top: 30px;
+    text-align: center;  
+}
+
+img{
+    margin-top: 15px;
+}
+
+
+#panel{
+    background-color: #fffafaee !important;
+    width: 20%;
+    height: 665px;
+    border-right: 1px solid #cccccc;
+    margin-right: 10px;
+}
+
+#logo{
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+/*Menu Acordeón ubicado en el panel*/
+.contenedor-menu{
+    background-color: #fffafaee;
+    width: 100%;
+    display: inline-block;
+    font-family: 'Raleway';
+}
+
+.contenedor-menu .menu2{
+    list-style: none;
+    width: 100%;    
+}
+
+.contenedor-menu ul{
+    list-style: none;
+}
+
+.contenedor-menu .menu2 li a{
+    color: #000000;
+    display: block;
+    padding: 10px 20px;
+    background: #fffafaee;
+    font-size: 16px;
+    text-decoration: none;
+    border-top: 1px solid #cccccc;
+    font-family: 'Mukta', sans-serif;
+}
+
+.contenedor-menu .menu2 li a:hover{
+    background: #7a97d8;
+    color: #ffffff;
+}
+
+.contenedor-menu .menu2 .icono.derecha{
+    float: right;
+    margin-left: 10px;
+}
+
+.contenedor-menu .menu2 ul{
+    display: none;
+}
+
+.contenedor-menu .menu2 ul li a{
+    background: #f1ececee;
+    color: #000000;
+    text-decoration: none;
+    
+}
+
+.contenedor-menu .menu2 .activado > a{
+    background: #6586d3;
+    color: #ffffff;
+}
+
+
+/*Ventana popup ayuda y soporte*/
+.overlay { 
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target{
+    visibility: visible;
+    opacity: 1;
+}
+
+#popupBody11{
+    width: 40%;
+    height: 50%;
+    padding: 2%;
+    border-radius: 5px;
+    background: rgb(252, 252, 252);
+    position: relative;
+    margin: 140px auto;
+    transition: all 3s ease-in-out;
+}
+
+#popupBody11{
+    list-style: none;
+}
+
+#cerrar{
+    position: absolute;
+    top: 5px;
+    right: 3px;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    transition: all 200ms;
+}
+
+#popup11 h3{
+    color: #0f3561;
+    margin-left: 20px;
+    float: left;
+    font-size: 23px;
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
+}
+
+#popup11 h4{
+    color: #696969;
+    margin-top: 30px;
+    margin-left: 20px;
+    font-size: 19px;
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
+}
+
+#papel{
+    margin-top: 25px;
+    margin-left: 18px;
+}
+
+#papel a{
+    text-decoration: none;
+    color: #000;
+    font-size: 17px;
+}
+
+#papel a:hover{
+    color: darkcyan;
+}
+
+
+.contenedor-menu2{
+    display: none;
+}
+
+#logoo{
+    display: none;
+}
+
+
+
+/*Responsive*/
+
+@media screen and (max-width:1190px){
+    
+    /*Se esconde el panel y el encabzado. se muestra el logo nuevo para la parte responsive*/
+    #panel{
+        display: none;
+    }
+
+    .text{
+        width: 100%;
+    }
+
+    header{
+        display: none;
+    }
+
+    #logoo{
+        display: block;
+    }
+
+    body{
+        padding-top: 0px;
+    }
+
+    /*Estilo del menú*/
+    .contenedor-menu2{
+        display: block;
+    }
+
+    .contenedor-menu2{
+        width: 100%;
+        margin-top: 0px;
+        font-family: 'Raleway';
+        background: #fffafaee;
+        margin-bottom: 0px;
+    }
+    
+    .contenedor-menu2 .menu2{
+        list-style: none;
+        width: 100%;
+        display: block;
+        margin-bottom: 0px;
+
+    }
+    
+    .contenedor-menu2 ul{
+        list-style: none;
+
+    }
+    
+    .contenedor-menu2 .menu2 li a{
+        color: #ffffff;
+        display: block;
+        padding: 8px 10px;
+        background: #6586d3;
+        font-size: 17px;
+        text-decoration: none;
+        font-family: 'Mukta', sans-serif;
+        border-bottom: 1px solid #cccccc;
+    }
+
+    .contenedor-menu2 .menu2 li a ul li {
+        color: #000000;
+        display: block;
+        padding: 10px 10px;
+        background: #fffafaee;
+        font-size: 17px;
+    }
+
+    .contenedor-menu2 .menu2 li a:hover{
+        background: #6586d3;
+        color: #ffffff;
+    }
+    
+    .contenedor-menu2 .menu2 .icono.derecha{
+        float: right;
+        margin-left: 10px;
+    }
+    
+    .contenedor-menu2 .menu2 ul{
+        display: none;
+    }
+    
+    .contenedor-menu2 .menu2 ul li a{
+        background: #f1ececee;
+        color: #000000;
+    }
+    
+    .contenedor-menu2 .menu2 .activado > a{
+        background: #6586d3;
+    }
+
+    #popupBody11{
+        width:100%;
+        height: 100%;
+        list-style: none;
+        margin-top: 0px;
+    }
+
+}
+

@@ -1,0 +1,845 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Fichas de producción</title>   
+        <link rel="shortcut icon" href="managment/img/logo2.png" type="image/x-icon" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./managment/css/estiloProducto.css" />  
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{ingreso.verificarAdmin()}"/>
+        <f:event type="preRenderView" listener="#{ingreso.usuariosDatos(false)}"/>
+
+        <!--Encabezado con el logo que aparece cuando es responsive-->
+        <section id="logoo" style="text-align: center; background: rgb(255 255 255); border-bottom: 1px solid #dcdcdc; padding-top: 8px; padding-bottom: 8px;">
+            <img src="managment/img/logo.png" alt="" width="200" />
+        </section>
+
+
+        <!--Muestra del menú cuando es responsive-->
+        <section>
+            <div class="contenedor-menu2">
+                <ul class="menu2">
+                    <li><a href="#">
+                            <i class="fas fa-bars" style="margin-right: 20px;" />
+                            #{etq.msj_menu}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="admin.xhtml"><i class="fas fa-home mr-2"></i>#{etq.msj_inicio}</a></li>
+                            <li><a href="inventarios.xhtml"><i class="fas fa-folder mr-2"></i>#{etq.msj_inven}</a></li>
+                            <li><a href="fichas_produccion.xhtml"><i class="fas fa-file-invoice mr-2"></i>#{etq.msj_fichaP}</a></li>
+                            <li><a href="satelites.xhtml"><i class="fas fa-industry mr-2"></i>#{etq.msj_satelite}</a></li>
+                            <li><a href="proveedores.xhtml"><i class="fas fa-truck-moving mr-2"></i>#{etq.msj_prov}</a></li>
+                            <li><a href="ordenes_produccion.xhtml"><i class="fas fa-file-signature mr-2"></i>#{etq.msj_ordenProdu}</a></li>
+                            <li><a href="cotizacion_ficha.xhtml"><i class="fas fa-file-invoice-dollar mr-2"></i>#{etq.msj_cotizaP}</a></li>
+                            <li><a href="ordenes_pago.xhtml"><i class="fas fa-dollar-sign mr-2"></i>#{etq.msj_ordenPago}</a></li>
+                            <li><a href="cotizacion.xhtml"><i class="fas fa-money-check-alt mr-2"></i>#{etq.msj_cotiza}</a></li>
+                            <li><a href="clientes.xhtml"><i class="fas fa-users mr-2"></i>#{etq.msj_clientes}</a></li>
+                            <li><a href="usuarios.xhtml"><i class="fas fa-users-cog mr-2"></i>#{etq.msj_usuario}</a></li>
+                            <li><h:form>
+                                    <h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                                        <i class="fas fa-power-off" style="margin-right: 13px"></i>#{etq.msj_cerrar}
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--Inicio del panel izquierdo, usando menú y submenu con Jquery-->
+
+        <section id="panel">
+            <div style="display: flex; justify-content: center; padding: 2px; border-bottom: 1px solid #e1e1e1;">
+                <img src="managment/img/logo.png" alt="logo" width="165" id="logo" /> 
+            </div>
+            <div class="contenedor-menu">
+                <ul class="menu2">                  
+                    <div class="sb-sidenav-menu-heading">Producción</div>
+                    <li>
+                        <a href="cotizaciones_ficha.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                                #{etq.msj_cotizaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ordenes_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                #{etq.msj_ordenProdu}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fichas_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                                #{etq.msj_fichaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="satelites.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                #{etq.msj_satelite}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="proveedores.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck-moving"></i></div>
+                                #{etq.msj_prov}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Inventario</div>
+                    <li>
+                        <a href="inventarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                #{etq.msj_inven}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tshirt"></i></div>
+                                #{etq.msj_product}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="insumos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cut"></i></div>
+                                #{etq.msj_insumos}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Ventas</div>
+                    <li>
+                        <a href="ordenes_pago.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
+                                #{etq.msj_ordenPago}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cotizacion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                #{etq.msj_cotiza}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="clientes.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                #{etq.msj_clientes}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Otros</div>
+                    <li><a href="usuarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
+                                #{etq.msj_usuario}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                #{etq.msj_reports}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="reportesInventarios.xhtml">#{etq.msj_r1}</a></li>
+                            <li><a href="reportesProductos.xhtml">#{etq.msj_r2}</a></li>
+                            <li><a href="reportesFichas.xhtml">#{etq.msj_r3}</a></li>
+                            <li><a href="reportesCotizaciones_ficha.xhtml">#{etq.msj_r4}</a> </li>
+                            <li><a href="reportesOrdenes_pago.xhtml">#{etq.msj_r5}</a></li>
+                            <li><a href="reportesCotizaciones.xhtml">#{etq.msj_r6}</a></li>
+                            <li><a href="reportesUsuarios.xhtml">#{etq.msj_r7}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!--Encabezado simple-->
+        <header id="Encabezado">        
+            <h:form><h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                    <i class="fas fa-power-off"></i></h:commandLink>
+            </h:form>
+            <a href="admin.xhtml"><i class="fas fa-home"></i></a>
+            <a href="">#{etq.msj_admin} #{ingreso.usuar.nomUsuario} #{ingreso.usuar.apellUsuario}</a>
+        </header>
+
+        <!--Segunda barra con titulo-->
+        <section id="barra2">
+            <div><h4 id="componente">#{etq.msj_fichaP}</h4></div> 
+        </section>
+
+
+        <!--Tercera barra con titulo-->
+        <section id="barra3">
+            <div><h4 id="subtitulo">#{etq.msj_ficha}</h4></div>
+        </section>
+
+        <section id="cuerpo1">
+            <div>
+                <f:event type="preRenderView" listener="#{fichas_produccionBean.listar(false)}"/>  
+                <f:event type="preRenderView" listener="#{ordenes_produccionBean.listar(false)}"/>
+                <f:event type="preRenderView" listener="#{satelitesBean.listar(false)}"/>
+                <f:event type="preRenderView" listener="#{tallasBean.listar(false)}"/>
+                <f:event type="preRenderView" listener="#{fichas_InsumosBean.listar(false)}"/>
+                <f:event type="preRenderView" listener="#{insumosBean.listar(false)}"/>
+
+                <p:growl id="msj" sticky="true"/>                
+
+                <h:form enctype="multipart/form-data" id="imprimir">
+                    <div style="display: flex;">
+                        <div style="width: 85%">
+                            <h:selectOneMenu value="#{fichaReporte.idFicha_produccion}" style="margin-right: 10px; border: 1px solid #ccc; 
+                                             padding: 5px; font-family: Arial,sans-serif; font-size: 14px; margin-top: 10px; width: 100%; 
+                                             color:#5F6264;" required="true" requiredMessage="No seleccionó ficha de producción">
+                                <f:selectItem noSelectionOption="true" itemLabel="Seleccione orden" itemValue="#{null}"/>
+                                <f:selectItems value="#{fichas_produccionBean.lstFichas_produccion}" var="ficha" 
+                                               itemLabel="#{ficha.idFicha_produccion}" itemValue="#{ficha.idFicha_produccion}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div style="width: 15%; display: flex; justify-content: flex-end">
+                            <p:commandButton ajax="false" id="reporte1" value="Imprimir" actionListener="#{fichaReporte.verReportePdf()}" 
+                                             style="margin-right: 10px; width:100px; font-size: 13px; background: #17a2b8; color: #fff;" 
+                                             update=':msj'/>
+                        </div>
+                    </div>
+                </h:form>
+
+                <h:form id='frm'>
+                    <div style="display: flex; margin-top: 10px; margin-left: 0px;">
+                        <div style="width: 50%;"> 
+                            <p:commandButton value="Agregar Insumo a Ficha" oncomplete="PF('wdlgAgregarInsumo').show();"
+                                             actionListener="#{fichas_InsumosBean.setAccion('Agregar insumo a ficha')}"
+                                             update=":dlgAgregarInsumo" style="background: #17a2b8; color: #fff; font-weight: lighter;
+                                             font-size: 14px; border: 1px solid #ccc; font-family: Roboto, sans-serif"/>
+
+                            <p:commandButton value="Ver Detalles Fichas" oncomplete="PF('wdlgDetallesFichas').show();"
+                                             update=":dlgDetallesFichas" style="background: #17a2b8; color: #fff; font-weight: lighter;
+                                             font-size: 14px; border: 1px solid #ccc; font-family: Roboto, sans-serif"/>
+                        </div>
+
+                        <div style="display: flex; width: 50%; justify-content: flex-end; margin-right:0px">
+                            <button type="button" class="btn" style="background-color: #28a745; margin-right: 10px">
+                                <a href="nuevaFicha.xhtml" style="text-decoration: none; font-size: 14px; color: #fff; 
+                                   font-family: Roboto, sans-serif;">
+                                    Nueva Ficha
+                                </a>
+                            </button>                           
+                            <a href="reportesFichas.xhtml" style="text-decoration: none; margin-right: 5px">
+                                <img src="managment/img/crecimiento.png" width="40" />
+                            </a> 
+                            <h:commandLink style="margin-right: 5px">
+                                <h:graphicImage url="managment/img/pdf.png" width="40"/>
+                                <p:dataExporter type="PDF" target="datos" fileName="#{etq.msj_fichaP}"/>
+                            </h:commandLink>
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/excel.png" width="40"/>
+                                <p:dataExporter type="xls" target="datos" fileName="#{etq.msj_fichaP}"/>
+                            </h:commandLink>
+                        </div>
+                    </div>
+
+
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header" style="font-family: 'Mukta';">
+                            <i class="fas fa-table mr-1" style="color: #a8a8a8;"></i>
+                            Fichas de producción registrados
+                        </div>
+                        <div class="card-body">
+                            <p:dataTable id="datos" value="#{fichas_produccionBean.lstFichas_produccion}" var="Fichas" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="8" style="font-size: 13px; text-align: center; padding: 10px">
+
+                                <p:column headerText="#{etq.msj_codigo}" footerText="#{etq.msj_codigo}">
+                                    <p:outputLabel value="#{Fichas.idFicha_produccion}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_nombre}" footerText="#{etq.msj_nombre}">
+                                    <p:outputLabel value="#{Fichas.productFicha_producc}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_comienzo}" footerText="#{etq.msj_comienzo}">
+                                    <p:outputLabel value="#{Fichas.fechaIFicha_producc}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_final}" footerText="#{etq.msj_final}">
+                                    <p:outputLabel value="#{Fichas.fechaSFicha_producc}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_tiempo}" footerText="#{etq.msj_tiempo}">
+                                    <p:outputLabel value="#{Fichas.tiempoFicha_producc}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_talla}" footerText="#{etq.msj_talla}">
+                                    <p:outputLabel value="#{Fichas.tallaFicha_producc}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_estado}" footerText="#{etq.msj_estado}">
+                                    <p:outputLabel value="#{Fichas.estadoFicha_producc}"/>
+                                </p:column>
+
+                                <p:column headerText="Acciones">
+                                    <p:commandLink actionListener="#{fichas_produccionBean.ver(Fichas)}"
+                                                   oncomplete="PF('wdlgVer').show();"
+                                                   update=":dlgVer" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/eye.png" width="12"/>
+                                    </p:commandLink>
+
+                                    <p:commandLink actionListener="#{fichas_produccionBean.leerID(Fichas)}"
+                                                   oncomplete="PF('wdlgModificar').show();"
+                                                   update=":dlgModificar" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/edit.png" width="12"/>
+                                    </p:commandLink>
+
+                                    <p:commandLink oncomplete="PF('wdlgEliminar').show();" update=":formEliminar">
+                                        <f:setPropertyActionListener target="#{fichas_produccionBean.fichas_produccion}" value='#{Fichas}'/>
+                                        <p:graphicImage url="managment/img/close.png" width="12"/>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable> 
+                        </div>
+                    </div>
+                </h:form>
+
+
+                <!--Ver Ficha de producción-->
+                <p:dialog header="Ver Ficha de producción" widgetVar="wdlgVer" id="dlgVer" style='font-size: 14px' 
+                          showEffect="explode" hideEffect="explode" modal="true">
+                    <h:form style="margin: 15px; width: 900px;">
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px; '>Información del producto</h5>  
+                        </div>
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_codigo}:" style='font-size: 14px'/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.idFicha_produccion}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_comienzo}:" 
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px "/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.fechaIFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_tiempo}:" style="margin-right: 45px; font-size: 14px "/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.tiempoFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_final}:" style="margin-right: 33px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.fechaSFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_ordenPro}:" style="margin-right: 52px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.idOrden_produccion}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_sate}:" style="margin-right: 15px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.idSatelite}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>#{etq.msj_datosProdu}</h5>
+                        </div> 
+
+                        <div style="display:flex;">
+                            <div style="width: 33%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre}:" style="margin-right: 52px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.productFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 33%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_cantidad}:" style="margin-right: 15px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.cantidadFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 33%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_talla}:" style="margin-right: 15px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.tallaFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div style="width: 33%; display:flex;">
+                                <div style="width: 50%; margin-right: 9px">
+                                    <p:outputLabel value="#{etq.msj_precioTotal}:" style="margin-right: 15px; font-size: 14px; margin-right: 10px"/>
+                                </div>
+                                <div style="width: 50%; ">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.valorTotalFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 33%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_categoria}:" style="margin-left:10px;"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.categoriaFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 33%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_genero}:" style="margin-right: 15px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.generoFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">                            
+                            <div style="width: 33%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_color}:" style="margin-right: 15px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.colorFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                            <div style="width: 67%; display:flex;">
+                                <div style="width: 24%; margin-left: 10px">
+                                    <p:outputLabel value="#{etq.msj_descripcion}:" style="margin-right: 10px"/>
+                                </div>
+                                <div style="width: 73%">
+                                    <p:outputLabel value="#{fichas_produccionBean.fichas_produccion.descripcionFicha_producc}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="Cerrar" immediate="true" oncomplete="PF('wdlgVer').hide();" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  
+                                         font-weight: lighter;"/>
+                    </h:form>
+                </p:dialog>
+
+                <!--Modificar Ficha de producción-->
+                <p:dialog header="#{fichas_produccionBean.accion}" widgetVar="wdlgModificar" id="dlgModificar" 
+                          style='font-size: 14px'
+                          showEffect="explode" hideEffect="explode" modal="true" >
+
+                    <h:form style="margin: 15px; width: 900px; font-family: Roboto, sans-serif">
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>#{etq.msj_datosFicha}</h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_codigo}:" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{fichas_produccionBean.fichas_produccion.idFicha_produccion}" 
+                                                 style="width:100%; font-size: 14px" disabled="true"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_comienzo}:" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:calendar locale="es" value="#{fichas_produccionBean.fichas_produccion.fechaIFicha_producc}" 
+                                                disabled="true" style="width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_tiempo}:" style="margin-right: 40px; font-size: 14px" for='tiempo'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id='tiempo' value="#{fichas_produccionBean.fichas_produccion.tiempoFicha_producc}" 
+                                                 style="width:100%; font-size: 14px" required="true" 
+                                                 requiredMessage="Tiempo: No digitó tiempo aproximado"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_final}:" style="margin-right: 40px; font-size: 14px" for='fechaFin'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:calendar locale="es" id='fechaFin' value="#{fichas_produccionBean.fichas_produccion.fechaSFicha_producc}" 
+                                                required="true" style="width:100%; font-size: 14px" requiredMessage="Fecha fin: No seleccionó fecha"/> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_ordenPro}" style="margin-right: 40px; font-size: 14px" for='ordenes'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="ordenes" value="#{fichas_produccionBean.fichas_produccion.idOrden_produccion}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style="width:100%;"
+                                                     requiredMessage="Orden: No seleccionó orden de producción">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{ordenes_produccionBean.lstOrdenes_produccion}" var="orden" 
+                                                       itemLabel="#{orden.idOrden_produccion} - #{orden.productoOrden_produccion} - #{orden.tallaOrden_produccion}" 
+                                                       itemValue="#{orden.idOrden_produccion}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_sate} " style="margin-right: 40px; font-size: 14px" for='satelites'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="satelites" value="#{fichas_produccionBean.fichas_produccion.idSatelite}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style="width:100%;" 
+                                                     requiredMessage="Satélite: No seleccionó satélite">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{satelitesBean.lstSatelites}" var="satelite" itemLabel="#{satelite.nomSatelite}" itemValue="#{satelite.idSatelite}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 10px; font-size: 16px'>#{etq.msj_datosProdu}</h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 33%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre} " style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{fichas_produccionBean.fichas_produccion.productFicha_producc}" 
+                                                 style="width:100%; font-size: 14px" disabled="true"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 33%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_cantidad}" style="margin-right: 40px; font-size: 14px" for='cantidad'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id='cantidad' value="#{fichas_produccionBean.fichas_produccion.cantidadFicha_producc}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Cantidad: Digite una cantidad"
+                                                 autocomplete="off" 
+                                                 validatorMessage="Cantidad: La cantidad deber ser igual o mayor a '1'" 
+                                                 converterMessage="Cantidad: Ingrese solo valores númericos">
+                                        <f:validateLongRange minimum="1"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+
+                            <div style="width: 33%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_talla}" style="margin-right: 40px; font-size: 14px" for='tallas'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="tallas" value="#{fichas_produccionBean.fichas_produccion.tallaFicha_producc}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style="width:100%;" 
+                                                     requiredMessage="Talla: No seleccionó una talla">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{tallasBean.lstTallas}" var="talla" itemLabel="#{talla.idTalla}" itemValue="#{talla.idTalla}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 33%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_precioTotal}" style="margin-right: 40px; font-size: 14px" for='precio'/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id='precio' value="#{fichas_produccionBean.fichas_produccion.valorTotalFicha_producc}" 
+                                                 style="width:100%; font-size: 14px" requiredMessage="Precio: Digite un valor unitario"
+                                                 autocomplete="off" disabled="true"
+                                                 validatorMessage="Precio:: El valor deber ser mayor que $1000" 
+                                                 converterMessage="Precio:: Ingrese solo valores númericos">
+                                        <f:validateLongRange minimum="1000"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 33%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_categoria}" style="margin-right: 40px; font-size: 14px" for="categoria"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="categoria" value="#{fichas_produccionBean.fichas_produccion.categoriaFicha_producc}"
+                                                     required="true" style="width:100%; font-size: 14px" 
+                                                     requiredMessage="Categoria: No seleccionó categoria">
+                                        <f:selectItem itemValue="#{null}" itemLabel="Seleccione categoria"/>  
+                                        <f:selectItem itemValue="Uniformes" itemLabel="Uniformes"/>
+                                        <f:selectItem itemValue="Dotaciones" itemLabel="Dotaciones"/>
+                                        <f:selectItem itemValue="Formal" itemLabel="Formal"/>
+                                        <f:selectItem itemValue="Informal" itemLabel="Informal"/>
+                                    </p:selectOneMenu>  
+                                </div>
+                            </div>
+                            <div style="width: 33%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_genero}" style="margin-right: 40px; font-size: 14px" for="genero"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="genero" value="#{fichas_produccionBean.fichas_produccion.generoFicha_producc}"
+                                                     required="true" style="width:100%; font-size: 14px" 
+                                                     requiredMessage="Género: No seleccionó género">
+                                        <f:selectItem itemValue="#{null}" itemLabel="Seleccione género"/>  
+                                        <f:selectItem itemValue="Femenino" itemLabel="Femenino"/>
+                                        <f:selectItem itemValue="Masculino" itemLabel="Masculino"/>
+                                    </p:selectOneMenu>  
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 33%; display:flex; margin-right:5px">
+                                <div style="width: 50%; margin-right: 5px">
+                                    <p:outputLabel value="#{etq.msj_color}" style="margin-right: 40px; font-size: 14px" for="color"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="color" value="#{fichas_produccionBean.fichas_produccion.colorFicha_producc}" 
+                                                 style="width:96%; font-size: 14px" required="true" 
+                                                 requiredMessage="Color: No digitón un color"/>
+                                </div>
+                            </div>
+                            <div style="width: 33%; display:flex; margin-right:10px">
+                                <div style="width: 50%; margin-right: 0px">
+                                    <p:outputLabel value="#{etq.msj_estado}" style="margin-right: 40px; font-size: 14px" for="estado"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="estado" value="#{fichas_produccionBean.fichas_produccion.estadoFicha_producc}"
+                                                     required="true" style="width:100%; font-size: 14px" 
+                                                     requiredMessage="Estado: No selecciono un estado">
+                                        <f:selectItem itemValue="#{null}" itemLabel="Seleccione estado"/>  
+                                        <f:selectItem itemValue="Entregada" itemLabel="Entregada"/>
+                                        <f:selectItem itemValue="No entregada" itemLabel="No entregada"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 100%; display:flex; margin-right: 10px">
+                                <div style="width: 16%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_descripcion}" style="margin-right: 40px; font-size: 14px" for="descripcion"/>
+                                </div>
+                                <div style="width: 84%;">
+                                    <p:inputText value="#{fichas_produccionBean.fichas_produccion.descripcionFicha_producc}" id="descripcion"
+                                                 style="width:100%; font-size: 14px" required="true" 
+                                                 requiredMessage="Descripción: No digitó una descripción"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="#{fichas_produccionBean.accion}" actionListener="#{fichas_produccionBean.operar()}" 
+                                         oncomplete="PF('wdlgModificar').hide();" 
+                                         update=":frm:datos :msj" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  
+                                         font-weight: lighter; "/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgModificar').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; 
+                                         font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+                <!--Eliminar Ficha-->
+                <h:form id="formEliminar">
+                    <p:dialog header="Eliminar registro" widgetVar="wdlgEliminar" id="dlgEliminar" 
+                              style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+                        <div style='display: flex; justify-content: center;'>
+                            <h:outputLabel value="¿Desea eliminar este registro?" style='font-size: 14px'/>
+                        </div>
+                        <div style='display: flex; justify-content: center;'>
+                            <p:commandButton value="SI" actionListener="#{fichas_produccionBean.eliminar()}"
+                                             update=":frm:datos :msj :imprimir" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #28a745; color: #fff; font-family:lighter; 
+                                             font-family: Roboto, sans-serif'/> 
+
+                            <p:commandButton value="NO" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #d63535; color: #fff; font-family:lighter; 
+                                             font-family: Roboto, sans-serif'/> 
+                        </div>
+                    </p:dialog>  
+                </h:form>
+
+                <!--Tabla de detalle de las fichas de producción-->
+                <p:dialog header="Detalles de las Fichas de producción" widgetVar="wdlgDetallesFichas" 
+                          id="dlgDetallesFichas" 
+                          style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form id="formulario">
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>
+                                Información detalle de las fichas de producción generadas
+                            </h5>  
+                        </div>
+                        <p:dataTable id="tabla2" value="#{fichas_InsumosBean.lstFicha_Insumo}" var="ficha"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                     paginator="true" rows="6" 
+                                     style="font-size: 13px; text-align: center; padding: 20px; width:1000px">
+
+                            <p:column headerText="Ficha" footerText="Ficha">
+                                <p:outputLabel value="#{ficha.idFicha_produccion}"/>
+                            </p:column>
+
+                            <p:column headerText="Descripción" footerText="Descripción">
+                                <p:outputLabel value="#{ficha.descripcionFicha_producc}"/>
+                            </p:column>
+
+                            <p:column headerText="Satélite" footerText="Satélite">
+                                <p:outputLabel value="#{ficha.nomSatelite}"/>
+                            </p:column>
+
+                            <p:column headerText="Insumos" footerText="Insumos">
+                                <p:outputLabel value="#{ficha.idInsumo} - #{ficha.nomInsumo}"/>
+                            </p:column>
+
+                            <p:column headerText="Cantidad" footerText="Cantidad">
+                                <p:outputLabel value="#{ficha.cantidad}"/>
+                            </p:column>
+
+                            <p:column headerText="Valor Insumos" footerText="Valor Insumos">
+                                <p:outputLabel value="#{ficha.valorInsumos}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:dialog>
+
+                <!--Agregar Insumo a una ficha de producción-->
+                <p:dialog header="#{fichas_InsumosBean.accion}" widgetVar="wdlgAgregarInsumo" id="dlgAgregarInsumo" 
+                          style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form style="margin: 15px; width: 600px; font-family: Roboto, sans-serif" id="form">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>
+                                Diligencie el formulario para agregar un nuevo insumo a una ficha de producción
+                            </h5>  
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="Ficha de producción " style="margin-right: 40px; font-size: 14px" for="ficha"/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:selectOneMenu id="ficha" value="#{fichas_InsumosBean.ficha_insumo.idFicha_produccion}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style='width:100%;' 
+                                                     requiredMessage="Ficha de producción: No seleccionó ficha">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione producto" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{fichas_produccionBean.lstFichas_produccion}" var="fichas" 
+                                                       itemLabel="#{fichas.idFicha_produccion} - #{fichas.descripcionFicha_producc}" itemValue="#{fichas.idFicha_produccion}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="Insumo:" style="margin-right: 40px; font-size: 14px" for="insumo"/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:selectOneMenu id="insumo" value="#{fichas_InsumosBean.ficha_insumo.idInsumo}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style='width:100%;' 
+                                                     requiredMessage="Insumo: No seleccionó insumo">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione inventario" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{insumosBean.lstInsumos}" var="insumo" 
+                                                       itemLabel="#{insumo.idInsumo} - #{insumo.nomInsumo}" itemValue="#{insumo.idInsumo}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 40%; margin-right: 10px">
+                                    <p:outputLabel value="Cantidad:" style="margin-right: 40px; font-size: 14px" for="cantidad"/>
+                                </div>
+                                <div style="width: 60%;">
+                                    <p:inputText id="cantidad" value="#{fichas_InsumosBean.ficha_insumo.cantidad}" style='width:100%;'
+                                                 required="true" requiredMessage="Cantidad: Digite una cantidad"
+                                                 autocomplete="off" 
+                                                 validatorMessage="Cantidad: La cantidad deber ser igual o mayor a '1'" 
+                                                 converterMessage="Cantidad: Ingrese solo valores númericos">
+                                        <f:validateLongRange minimum="1"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="#{fichas_InsumosBean.accion}" actionListener="#{fichas_InsumosBean.operar()}" 
+                                         oncomplete="PF('wdlgAgregarInsumo').hide();"
+                                         update=":formulario:tabla2 :msj"
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  
+                                         font-weight: lighter; "/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgAgregarInsumo').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; 
+                                         font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+            </div>
+        </section>
+        <script src="managment/js/jquery.js"></script>
+    </h:body>
+</html>

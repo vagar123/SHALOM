@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ed0d78a-e5bd-489d-9950-433687412504">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="cantidadProducto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idInventario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select productos.idProducto, productos.nomProducto, productos.generoProducto, productos.categoriaProducto,
+inventarios_productos_tallas_fichas.idTalla, productos.descriProducto,
+inventarios_productos_tallas_fichas.cantidadProducto
+from productos inner join inventarios_productos_tallas_fichas
+on productos.idProducto = inventarios_productos_tallas_fichas.idProducto
+where inventarios_productos_tallas_fichas.cantidadProducto <= $P{cantidadProducto}
+and inventarios_productos_tallas_fichas.idInventario = $P{idInventario};]]>
+	</queryString>
+	<field name="idProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla producto, esta identifica los productos que comercializa la empresa.]]></fieldDescription>
+	</field>
+	<field name="nomProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al nombre del producto.]]></fieldDescription>
+	</field>
+	<field name="generoProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a que género (Femenino o Masculino) vaya dirigido el producto.]]></fieldDescription>
+	</field>
+	<field name="categoriaProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a la categoria a la que puede pertener el producto, que puede ser uniformes, dotaciones, formal o informal.]]></fieldDescription>
+	</field>
+	<field name="idTalla" class="java.lang.String">
+		<fieldDescription><![CDATA[Clave primaria y foránea de la tabla inventari_producto_talla_ficha, hace referencia a la talla o el tamaño del producto (XS, S, M, L, XL).]]></fieldDescription>
+	</field>
+	<field name="descriProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a una descripción corta del producto, donde se puede mencionar las características que puede tener el producto.]]></fieldDescription>
+	</field>
+	<field name="cantidadProducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Hace referencia a la cantidad que se realizará del producto planteado en la ficha de producción.]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="11" y="13" width="263" height="33" uuid="1303f8dd-d399-442e-85a4-503ea55611eb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Productos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="79" y="46" width="195" height="22" uuid="b0be6d1c-fdae-4531-aa24-2c7e6c50156b"/>
+				<text><![CDATA[Cantidad y Inventarios]]></text>
+			</staticText>
+			<image>
+				<reportElement x="292" y="-1" width="263" height="69" uuid="cffb2517-9862-4ebf-8a9c-23dd30e72548"/>
+				<imageExpression><![CDATA["C:\\Users\\User\\Documents\\Sena\\Vanessa\\Proyecto\\Shalom Codificacion\\SHALOM\\web\\managment\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="636d5246-c30f-4a72-b106-ae393d36c777"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="47" height="15" uuid="4a3e776f-e126-47bd-8c7b-1004867063e5"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="47" y="19" width="111" height="15" uuid="12c42169-28d5-42b9-a0a2-6ead6690f148"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="158" y="19" width="58" height="15" uuid="abf20b74-7376-4b7b-a402-92c92452ee0a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Género]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="216" y="19" width="76" height="15" uuid="400e0a85-e79f-47ef-b0be-1915828a93e5"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="292" y="19" width="46" height="15" uuid="03062161-5839-441c-8c72-3872da35e357"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Talla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="338" y="19" width="153" height="15" uuid="b717f76f-4afd-4c6b-b0a3-bdab88bb03b1"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="491" y="19" width="62" height="15" uuid="7e66c040-eae8-42d8-90fb-1d9ee82c8a65"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="32" width="555" height="1" uuid="2ea9eacf-fded-48be-99a1-a9197e37bc80"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="47" height="32" uuid="b1bfdb25-4afe-421c-8e89-83f837e04447"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="47" y="0" width="111" height="32" uuid="95691fe0-af8d-4136-90b2-934bdc2ea414"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="158" y="0" width="58" height="32" uuid="428c26e6-dbc0-45a5-ba3d-7d4227ffc978"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{generoProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="216" y="0" width="76" height="32" uuid="269cba04-8220-4004-a9f6-664b494ff382"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{categoriaProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="292" y="0" width="46" height="32" uuid="06345a88-3593-4d7f-aaff-2593d94f0575"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idTalla}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="338" y="0" width="153" height="32" uuid="467cdd20-b6a7-466e-a706-cb925dae2ffb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descriProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="491" y="0" width="62" height="32" uuid="6b357742-ea48-4dce-8930-936a2231cb36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidadProducto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="82110c45-ebdd-4a03-9e80-954a6899a431"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="7bd87bc1-bc7f-4b82-a280-f541409f69b0"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="7ed20823-2cc2-4883-ad70-268a1f39b999"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="b6ef0fb5-cfcd-43b2-a629-0f5d706a1bf4"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

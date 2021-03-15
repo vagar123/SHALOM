@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9f6d17f2-7cdc-410b-8f20-d86173ebec49">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="45"/>
+	<property name="ireport.y" value="417"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="idFicha_produccion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select fichas_produccion.*, fichas_insumos.*, insumos.*, satelites.*
+from insumos inner join fichas_insumos
+on insumos.idInsumo = fichas_insumos.idInsumo
+inner join fichas_produccion
+on fichas_insumos.idFicha_produccion = fichas_produccion.idFicha_produccion
+inner join satelites
+on  fichas_produccion.idSatelite = satelites.idSatelite
+where fichas_produccion.idFicha_produccion = $P{idFicha_produccion};]]>
+	</queryString>
+	<field name="idFicha_produccion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla fichs_produccion, esta identifica todas las fichas de producción que se generen en el sistema de información en cuanto a una producción que se deba realizar.]]></fieldDescription>
+	</field>
+	<field name="productFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al producto que se realizará.]]></fieldDescription>
+	</field>
+	<field name="fechaIFicha_producc" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referencia a la fecha (año, mes, dia) en que inicia la producción planteada en la ficha de producción.]]></fieldDescription>
+	</field>
+	<field name="fechaSFicha_producc" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referencia a la fecha (año, mes, dia) en que termina la producción planteada en la ficha de producción.]]></fieldDescription>
+	</field>
+	<field name="cantidadFicha_producc" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Hace referencia a la cantidad que se realizará del producto planteado en la ficha de producción.]]></fieldDescription>
+	</field>
+	<field name="tiempoFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al tiempo que durará la producción de acuerdo a lo diligenciado en la fecha de inicio y la fecha de finalización.]]></fieldDescription>
+	</field>
+	<field name="tallaFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a la talla o el tamaño del producto (XS, S, M, L, XL).]]></fieldDescription>
+	</field>
+	<field name="valorTotalFicha_producc" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Hace referencia a la sumatoria total de todos los producto a realizar, es decir el costo de la producción.]]></fieldDescription>
+	</field>
+	<field name="categoriaFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a la categoria a la que puede pertener el producto, que puede ser uniformes, dotaciones, formal o informal.]]></fieldDescription>
+	</field>
+	<field name="generoFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a que género (Femenino o Masculino) vaya dirigido el producto.]]></fieldDescription>
+	</field>
+	<field name="colorFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al color que tendrá el producto]]></fieldDescription>
+	</field>
+	<field name="descripcionFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a una descripción corta del producto, donde se puede mencionar las características que puede tener el producto.]]></fieldDescription>
+	</field>
+	<field name="idOrden_produccion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave foránea de la tabla fichas_producción, hace referencia a la identificación única de la orden de producción, que da el aval final para que la producción sea puesta en marcha.]]></fieldDescription>
+	</field>
+	<field name="idSatelite" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave foránea de la tabla fichas_produccion, hace referencia al número que identifica al satélite dentro del sistema de información y además sera el encargado de ejecutar la producción.]]></fieldDescription>
+	</field>
+	<field name="estadoFicha_producc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idInsumo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria y foránea que hace referencia a la identificación única del insumo.]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Hace referencia a la cantidad de insumos que se utilizaron en un producto que se encuentra en la ficha de producción.]]></fieldDescription>
+	</field>
+	<field name="valorInsumos" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomInsumo" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al nombre del insumo.]]></fieldDescription>
+	</field>
+	<field name="precioUniInsumo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Hace referencia al valor o precio de cada insumo.]]></fieldDescription>
+	</field>
+	<field name="categoriaInsumo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="colorInsumo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descriInsumo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomSatelite" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al nombre del satélite.]]></fieldDescription>
+	</field>
+	<field name="teleSatelite" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Hace referencia al teléfono del satélite, sea fijo o celular.]]></fieldDescription>
+	</field>
+	<field name="direccSatelite" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a la dirección en la que se encuentra ubicado el satelite.]]></fieldDescription>
+	</field>
+	<field name="correoSatelite" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al correo electrónico del satelite, que servirá de medio de comunicación entre el satelite y el sistema de información.]]></fieldDescription>
+	</field>
+	<field name="fechaISatelite" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referenci a la fecha (año, mes y dia) en el que ingresó el satélite al sistema.]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="a8d046aa-fd38-4426-9d71-d3639aa32f4a"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Ficha de producción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="152" y="46" width="35" height="24" uuid="8d695478-f68f-4475-8526-ac464a150c58"/>
+				<text><![CDATA[Nro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="187" y="46" width="76" height="24" uuid="c5ce0ca7-3982-49d5-88ad-8de8ab1cdd36"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[idFicha_produccion]]></text>
+			</staticText>
+			<image>
+				<reportElement x="285" y="0" width="270" height="70" uuid="c5f3f00f-c75b-4518-bf2c-63ea76a41d8e"/>
+				<imageExpression><![CDATA["C:\\Users\\User\\Documents\\Sena\\Vanessa\\Proyecto\\Shalom Codificacion\\SHALOM\\web\\managment\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="385" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="384" width="555" height="1" uuid="2cf62991-0922-4e75-b7db-8ae352e61f3f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="201" width="133" height="15" uuid="50c4b8c4-2bad-4418-a930-46bde66622c5"/>
+				<text><![CDATA[productFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="66" width="133" height="15" uuid="6813ee70-00d7-4814-bdfa-57ae7fb798bf"/>
+				<text><![CDATA[fechaIFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="304" y="66" width="129" height="15" uuid="55e88802-4721-49f8-9263-031129ac62f3"/>
+				<text><![CDATA[fechaSFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="304" y="201" width="129" height="15" uuid="232c2710-70a8-414a-9eb5-b66d32d73bc4"/>
+				<text><![CDATA[cantidadFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="97" width="133" height="15" uuid="039e00ae-e4d2-4d7d-9185-95d244f1023b"/>
+				<text><![CDATA[tiempoFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="232" width="133" height="15" uuid="d5b7e198-a16c-4000-a4b9-12c50af2a8ab"/>
+				<text><![CDATA[tallaFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="304" y="232" width="129" height="15" uuid="a0a73a2b-e66e-4c91-8402-4fab3d74065d"/>
+				<text><![CDATA[categoriaFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="262" width="133" height="15" uuid="26fd68c8-0202-4372-9138-400e846d6d99"/>
+				<text><![CDATA[generoFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="304" y="262" width="129" height="15" uuid="1b14588d-07c0-4b1c-bcf1-b8e250d46edb"/>
+				<text><![CDATA[colorFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="307" y="294" width="126" height="15" uuid="bf263983-6e84-4321-9365-5d3190ad00b7"/>
+				<text><![CDATA[descripcionFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="131" width="133" height="15" uuid="801dd0be-7d09-48b2-b3f9-1cfa38d06cb4"/>
+				<text><![CDATA[idOrden_produccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="294" width="133" height="15" uuid="16329bb5-2cd2-44dc-9677-bf3e5e64342b"/>
+				<text><![CDATA[estadoFicha_producc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="370" width="65" height="15" uuid="980081c2-859e-4a02-9d77-38fb52ef691c"/>
+				<text><![CDATA[idInsumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="337" y="369" width="72" height="15" uuid="87bf4c4b-1016-4839-b0ad-47dab5fdf71f"/>
+				<text><![CDATA[cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="409" y="369" width="146" height="15" uuid="c4f75b73-152b-4060-9d57-faff6a7bdde7"/>
+				<text><![CDATA[valorInsumos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="65" y="370" width="122" height="15" uuid="0a98d85b-2103-44e2-ae21-90e5bed797ff"/>
+				<text><![CDATA[nomInsumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="187" y="370" width="150" height="14" uuid="fdbdaaca-a587-4b04-9151-6f1cf83b34dd"/>
+				<text><![CDATA[descriInsumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="304" y="97" width="129" height="15" uuid="73d6bded-9a82-4cd6-b0da-a39a87d7ab1b"/>
+				<text><![CDATA[nomSatelite]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="133" y="201" width="152" height="15" uuid="07e8fd7f-f3d6-45d4-aa00-4a0b2bbed8ea"/>
+				<textFieldExpression><![CDATA[$F{productFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="133" y="66" width="148" height="15" uuid="825b988c-3fbd-4461-8391-487e4c34ffd4"/>
+				<textFieldExpression><![CDATA[$F{fechaIFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="66" width="122" height="15" uuid="d9b5231f-640d-413a-822e-6b38d400196e"/>
+				<textFieldExpression><![CDATA[$F{fechaSFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="133" y="97" width="148" height="15" uuid="30371a5c-2991-4505-b33b-a006597c5c2b"/>
+				<textFieldExpression><![CDATA[$F{tiempoFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="97" width="120" height="15" uuid="d517ffa5-4a15-494c-ac96-d6f0d6600795"/>
+				<textFieldExpression><![CDATA[$F{nomSatelite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="133" y="131" width="148" height="15" uuid="a1634032-4fc5-4545-9462-efde8a75dd1b"/>
+				<textFieldExpression><![CDATA[$F{idOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="201" width="120" height="15" uuid="8c69e262-9d04-497c-b58b-1a4176ebe148"/>
+				<textFieldExpression><![CDATA[$F{cantidadFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="133" y="232" width="148" height="15" uuid="d2d992ce-d6ef-42c2-b792-9fe11312a4bd"/>
+				<textFieldExpression><![CDATA[$F{tallaFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="232" width="122" height="15" uuid="1ae5e92a-ddbc-4dab-9f5a-7db942cef63b"/>
+				<textFieldExpression><![CDATA[$F{categoriaFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="133" y="262" width="148" height="15" uuid="86a5e78f-4712-4fa4-8fd2-ccd28da52361"/>
+				<textFieldExpression><![CDATA[$F{generoFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="262" width="122" height="15" uuid="909d7bc4-ff4a-4ed5-8e6a-7a4803370c19"/>
+				<textFieldExpression><![CDATA[$F{colorFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="133" y="294" width="148" height="15" uuid="5f64111f-18eb-4b55-834d-9245823e94bc"/>
+				<textFieldExpression><![CDATA[$F{estadoFicha_producc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="294" width="122" height="15" uuid="4f839110-8ed6-40d1-9c5e-c8d784210690"/>
+				<textFieldExpression><![CDATA[$F{descripcionFicha_producc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="23" width="555" height="1" uuid="979e8b70-0025-46f4-9d6d-5626a06adcb1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="65" y="1" width="122" height="22" uuid="b0bfe6f1-b3d9-4689-b2b3-275db8ccac8e"/>
+				<textFieldExpression><![CDATA[$F{nomInsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="187" y="1" width="150" height="22" uuid="3ead7386-9a8b-4554-b552-5ad0b63fac65"/>
+				<textFieldExpression><![CDATA[$F{descriInsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="407" y="0" width="146" height="23" uuid="f948603a-cdda-4b5e-a4dc-61517829fdab"/>
+				<textFieldExpression><![CDATA[$F{valorInsumos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="65" height="23" uuid="d0778f9a-2bf4-4c98-a9a9-36e8da3bf27b"/>
+				<textFieldExpression><![CDATA[$F{idInsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="337" y="1" width="72" height="23" uuid="0dcaf36d-c1ea-425b-874d-ab9892af90f8"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="d2f5f0b8-6846-4048-87b9-2d50173f82a1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="409" y="18" width="146" height="15" uuid="67293da2-57c4-4be4-a847-7b633376b715"/>
+				<textFieldExpression><![CDATA[$F{valorTotalFicha_producc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="337" y="18" width="72" height="15" uuid="f165fc27-1d24-4b91-bd1a-9e82b43ef903"/>
+				<text><![CDATA[valorTotalFicha_producc]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="a0ba20cb-a9d1-4dea-857c-95c2587a2101"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="97b71518-d8d3-44af-9366-b350fdba25c8"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="105b90d5-36f7-4e0c-bd06-3d4d45182d00"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,844 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{etq.msj_usuario}</title>   
+        <link rel="shortcut icon" href="managment/img/logo2.png" type="image/x-icon" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./managment/css/estiloProducto.css" />   
+    </h:head>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{ingreso.verificarAdmin()}"/>
+        <f:event type="preRenderView" listener="#{ingreso.usuariosDatos(false)}"/>
+
+        <!--Encabezado con el logo que aparece cuando es responsive-->
+        <section id="logoo" style="text-align: center; background: rgb(255 255 255); border-bottom: 1px solid #dcdcdc; padding-top: 8px; padding-bottom: 8px;">
+            <img src="managment/img/logo.png" alt="" width="200" />
+        </section>
+
+        <!--Muestra del menú cuando es responsive-->
+        <section>
+            <div class="contenedor-menu2">
+                <ul class="menu2">
+                    <li><a href="#">
+                            <i class="fas fa-bars" style="margin-right: 20px;" />
+                            #{etq.msj_menu}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="admin.xhtml"><i class="fas fa-home mr-2"></i>#{etq.msj_inicio}</a></li>
+                            <li><a href="inventarios.xhtml"><i class="fas fa-folder mr-2"></i>#{etq.msj_inven}</a></li>
+                            <li><a href="fichas_produccion.xhtml"><i class="fas fa-file-invoice mr-2"></i>#{etq.msj_fichaP}</a></li>
+                            <li><a href="satelites.xhtml"><i class="fas fa-industry mr-2"></i>#{etq.msj_satelite}</a></li>
+                            <li><a href="proveedores.xhtml"><i class="fas fa-truck-moving mr-2"></i>#{etq.msj_prov}</a></li>
+                            <li><a href="ordenes_produccion.xhtml"><i class="fas fa-file-signature mr-2"></i>#{etq.msj_ordenProdu}</a></li>
+                            <li><a href="cotizacion_ficha.xhtml"><i class="fas fa-file-invoice-dollar mr-2"></i>#{etq.msj_cotizaP}</a></li>
+                            <li><a href="ordenes_pago.xhtml"><i class="fas fa-dollar-sign mr-2"></i>#{etq.msj_ordenPago}</a></li>
+                            <li><a href="cotizacion.xhtml"><i class="fas fa-money-check-alt mr-2"></i>#{etq.msj_cotiza}</a></li>
+                            <li><a href="clientes.xhtml"><i class="fas fa-users mr-2"></i>#{etq.msj_clientes}</a></li>
+                            <li><a href="usuarios.xhtml"><i class="fas fa-users-cog mr-2"></i>#{etq.msj_usuario}</a></li>
+                            <li><h:form>
+                                    <h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                                        <i class="fas fa-power-off" style="margin-right: 13px"></i>#{etq.msj_cerrar}
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--Inicio del panel izquierdo, usando menú y submenu con Jquery-->
+
+        <section id="panel">
+            <div style="display: flex; justify-content: center; padding: 2px; border-bottom: 1px solid #e1e1e1;">
+                <img src="managment/img/logo.png" alt="logo" width="165" id="logo" /> 
+            </div>
+            <div class="contenedor-menu">
+                <ul class="menu2">                  
+                    <div class="sb-sidenav-menu-heading">Producción</div>
+                    <li>
+                        <a href="cotizaciones_ficha.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                                #{etq.msj_cotizaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ordenes_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                #{etq.msj_ordenProdu}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fichas_produccion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                                #{etq.msj_fichaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="satelites.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                #{etq.msj_satelite}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="proveedores.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck-moving"></i></div>
+                                #{etq.msj_prov}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Inventario</div>
+                    <li>
+                        <a href="inventarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                #{etq.msj_inven}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tshirt"></i></div>
+                                #{etq.msj_product}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="insumos.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cut"></i></div>
+                                #{etq.msj_insumos}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Ventas</div>
+                    <li>
+                        <a href="ordenes_pago.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
+                                #{etq.msj_ordenPago}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cotizacion.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                #{etq.msj_cotiza}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="clientes.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                #{etq.msj_clientes}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Otros</div>
+                    <li><a href="usuarios.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users-cog"></i></div>
+                                #{etq.msj_usuario}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                #{etq.msj_reports}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="reportesInventarios.xhtml">#{etq.msj_r1}</a></li>
+                            <li><a href="reportesProductos.xhtml">#{etq.msj_r2}</a></li>
+                            <li><a href="reportesFichas.xhtml">#{etq.msj_r3}</a></li>
+                            <li><a href="reportesCotizaciones_ficha.xhtml">#{etq.msj_r4}</a> </li>
+                            <li><a href="reportesOrdenes_pago.xhtml">#{etq.msj_r5}</a></li>
+                            <li><a href="reportesCotizaciones.xhtml">#{etq.msj_r6}</a></li>
+                            <li><a href="reportesUsuarios.xhtml">#{etq.msj_r7}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!--Encabezado simple-->
+        <header id="Encabezado">        
+            <h:form><h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                    <i class="fas fa-power-off"></i></h:commandLink>
+            </h:form>
+            <a href="admin.xhtml"><i class="fas fa-home"></i></a>
+            <a href="">#{etq.msj_admin} #{ingreso.usuar.nomUsuario} #{ingreso.usuar.apellUsuario}</a>
+        </header>
+
+        <!--Segunda barra con titulo-->
+        <section id="barra2">
+            <div><h4 id="componente">#{etq.msj_usuario}</h4></div> 
+        </section>
+
+        <!--Tercera barra con titulo-->
+        <section id="barra3">
+            <div><h4 id="subtitulo">#{etq.msj_usu}</h4></div>
+        </section>
+
+        <section id="cuerpo1">
+            <div>
+                
+                <f:event type="preRenderView" listener="#{usuariosBean.listar(false)}"/>
+                <f:event type="preRenderView" listener="#{localesBean.listar(false)}"/>                
+                <f:event type="preRenderView" listener="#{administradoresBean.listar(false)}"/>   
+                <f:event type="preRenderView" listener="#{usu_contraBean.listar(false)}"/>   
+
+                <p:growl id="msj" sticky="true"/>
+
+                <h:form id='frm'>
+                    <div style="display: flex; margin-top: 10px; margin-left: 0px;">
+                        <div style="width: 50%;">
+
+                            <p:commandButton value="Código admin" oncomplete="PF('wdlgDatos2').show();"
+                                             actionListener="#{administradoresBean.setAccion('Agregar admin')}"
+                                             update=":dlgDatos2" style="background: #17a2b8; color: #fff; font-weight: lighter; 
+                                             margin-right: 20px; font-size: 14px"/> 
+
+                            <p:commandButton value="Admins" oncomplete="PF('wdlgAdmin').show();"
+                                             update=":dlgAdmin" style="background: #17a2b8; color: #fff; font-weight: lighter;
+                                             font-size: 14px; border: 1px solid #ccc; font-family: Roboto, sans-serif"/>
+
+                            <p:commandButton value="Asignar usuario y contraseña" oncomplete="PF('wdlgContraseña').show();" 
+                                             actionListener="#{usu_contraBean.setAccion('Agregar contraseña')}"
+                                             update=":dlgContraseña" style="background: #17a2b8; color: #fff; font-weight: lighter;
+                                             font-size: 14px; border: 1px solid #ccc; font-family: Roboto, sans-serif; margin-left: 20px;"/>
+                        </div>
+                        <div style="display: flex; width: 50%; justify-content: flex-end; margin-right: 15px">
+                            <p:commandButton value="#{etq.msj_nuevoUsuario}" oncomplete="PF('wdlgAgregar').show();"
+                                             actionListener="#{usuariosBean.setAccion('Agregar usuario')}"
+                                             update=":dlgAgregar" 
+                                             style="background: #28a745; color: #fff; font-size: 14px; margin-right: 10px;
+                                             font-weight: lighter; font-family: Roboto, sans-serif; padding: 1px; border: 1px solid #ccc;"/>                   
+
+                            <a href="usuariosContraseñas.xhtml" style="text-decoration: none; padding-right: 5px;padding-left: 5px;">
+                                <img src="managment/img/usuario.png" width="40" />
+                            </a>  
+                            
+                            <a href="reportesUsuarios.xhtml" style="text-decoration: none; padding-right: 5px;padding-left: 5px;">
+                                <img src="managment/img/crecimiento.png" width="40" />
+                            </a>                           
+                          
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/pdf.png" width="40"/>
+                                <p:dataExporter type="PDF" target="datos" fileName="#{etq.msj_usuario}"/>
+                            </h:commandLink>
+
+                            <h:commandLink>
+                                <h:graphicImage url="managment/img/excel.png" width="40"/>
+                                <p:dataExporter type="xls" target="datos" fileName="#{etq.msj_usuario}"/>
+                            </h:commandLink>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 mt-4">
+                        <div class="card-header" style="font-family: 'Mukta';">
+                            <i class="fas fa-table mr-1" style="color: #a8a8a8;"></i>
+                            Usuarios registrados
+                        </div>
+                        <div class="card-body">
+                            <p:dataTable id="datos" value="#{usuariosBean.lstPersonas}" var="persona" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="8" style="font-size: 13px; text-align: center; padding-top: 10px">
+
+                                <p:column headerText="#{etq.msj_codigo}" footerText="#{etq.msj_codigo}">
+                                    <p:outputLabel value="#{persona.idUsuario}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_nombre}" footerText="#{etq.msj_nombre}">
+                                    <p:outputLabel value="#{persona.nomUsuario}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_apellido}" footerText="#{etq.msj_apellido}">
+                                    <p:outputLabel value="#{persona.apellUsuario}"/>
+                                </p:column>
+
+                                <p:column headerText="#{etq.msj_cargo}" footerText="#{etq.msj_cargo}">
+                                    <p:outputLabel value="#{persona.cargoUsuario}"/>
+                                </p:column>
+
+
+                                <p:column headerText="Acciones">
+                                    <p:commandLink actionListener="#{usuariosBean.ver(persona)}"
+                                                   oncomplete="PF('wdlgVer').show();"
+                                                   update=":dlgVer" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/eye.png" width="12"/>
+                                    </p:commandLink>
+                                    <p:commandLink actionListener="#{usuariosBean.leerID(persona)}"
+                                                   oncomplete="PF('wdlgModificar').show();"
+                                                   update=":dlgModificar" style="margin-right: 10px">
+                                        <p:graphicImage url="managment/img/edit.png" width="12"/>
+                                    </p:commandLink>
+                                    <p:commandLink oncomplete="PF('wdlgEliminar').show();" update=":formEliminar">
+                                        <f:setPropertyActionListener target="#{usuariosBean.persona}" value='#{persona}'/>
+                                        <p:graphicImage url="managment/img/close.png" width="12"/>
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>  
+                        </div>
+                    </div>
+                </h:form>
+
+
+                <!--Agregar usuario-->
+                <p:dialog header="#{usuariosBean.accion}" widgetVar="wdlgAgregar" id="dlgAgregar" style='font-size: 14px'
+                          showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form enctype="multipart/form-data" style="margin: 15px; width: 800px; 
+                            font-family: Roboto, sans-serif; padding-bottom:40px;">
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>#{etq.msj_carga}</h5>
+                        </div>
+
+                        <h:inputFile value="#{usuariosBean.excel}" 
+                                     style="font: bold 15px arial; color: #A19E9E; margin-right: 10px;" 
+                                     required="true" requiredMessage="No seleccionó archivo"/>
+
+                        <p:commandButton  ajax="false" value="#{etq.msj_migracion}" actionListener="#{usuariosBean.migrar()}" 
+                                          update="msj" 
+                                          style="background: #8686d0; color: #fff; font-size: 14px; font-weight: lighter; margin-right: 20px"/>
+                    </h:form>
+
+
+                    <h:form style="margin: 15px; width: 800px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>
+                                Diligencie el formulario para ingresar un nuevo cliente
+                            </h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 26%;">
+                                    <p:outputLabel value="#{etq.msj_codigo}:" style="margin-right: 40px; font-size: 14px"
+                                                   for="codigo"/>
+                                </div>
+                                <div style="width: 75%;">
+                                    <p:inputText id="codigo" value="#{usuariosBean.persona.idUsuario}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Código: No digitó el código" autocomplete="off" 
+                                                 validatorMessage="Código: El código deber ser igual o mayor a '1'" 
+                                                 converterMessage="Código: Ingrese solo valores númericos">
+                                        <f:validateLongRange minimum="1"></f:validateLongRange>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre}:" style="margin-right: 40px; font-size: 14px" for="nombre"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="nombre" value="#{usuariosBean.persona.nomUsuario}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Nombre: No digitó el nombre" autocomplete="off" 
+                                                 converterMessage="Nombre: El nombre no debe llevar valores númericos"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_apellido}:" 
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px" for="apellido"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{usuariosBean.persona.apellUsuario}" style="width:100%; font-size: 14px"
+                                                 id="apellido" required="true"
+                                                 requiredMessage="Apellido: No digitó el apellido" autocomplete="off"
+                                                 converterMessage="Apellido: El apellido no debe llevar valores númericos"/>
+                                </div> 
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_telefono}:" style="margin-right: 40px; font-size: 14px"
+                                                   for="telefono"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="telefono" value="#{usuariosBean.persona.teleUsuario}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Télefono: No digitó un teléfono" 
+                                                 validatorMessage="Télefono: El número de teléfono debe tener 7 digitos"
+                                                 autocomplete="off" converterMessage="Teléfono: Ingrese solo valores númericos">
+                                        <f:validateLength minimum="7" maximum="7"/>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_corre}" for="correo"
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{usuariosBean.persona.correoUsuario}" id="correo" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Correo: No digitó un correo" autocomplete="off" >
+                                        <f:validator validatorId="emailValidator"></f:validator>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel for="genero" value="#{etq.msj_cargo}:" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="genero" value="#{usuariosBean.persona.cargoUsuario}"
+                                                     required="true" style="width:100%; font-size: 14px" 
+                                                     requiredMessage="Género: No seleccionó un género">
+                                        <f:selectItem itemValue="#{null}" itemLabel="#{etq.msj_seleccione}"/>  
+                                        <f:selectItem itemValue="Administrador" itemLabel="#{etq.msj_admin}"/>
+                                        <f:selectItem itemValue="Empleado" itemLabel="#{etq.msj_empleado}"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel for="local" value="#{etq.msj_local}:" style="margin-right: 40px; font-size: 14px; margin-left:10px;"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="local" value="#{usuariosBean.persona.idLocal}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style='width:100%;' 
+                                                     requiredMessage="Local: No seleccionó local">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione local" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{localesBean.lstLocales}" var="local" 
+                                                       itemLabel="#{local.idLocal}" itemValue="#{local.idLocal}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="#{usuariosBean.accion}" actionListener="#{usuariosBean.operar()}"
+                                         oncomplete="PF('wdlgAgregar').hide();" 
+                                         update=":frm:datos :msj" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  font-weight: lighter;"/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgAgregar').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+                <!--Ver usuario-->
+                <p:dialog header="Ver Usuario" widgetVar="wdlgVer" id="dlgVer" style='font-size: 14px' 
+                          showEffect="explode" hideEffect="explode" modal="true">                    
+
+                    <h:form style="margin: 15px; width: 700px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>
+                                Información del usuario
+                            </h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_codigo} " style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{usuariosBean.persona.idUsuario}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre} "/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{usuariosBean.persona.nomUsuario}"
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_apellido}" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{usuariosBean.persona.apellUsuario}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_telefono}"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{usuariosBean.persona.teleUsuario}"
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_corre}" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{usuariosBean.persona.correoUsuario}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_cargo}"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{usuariosBean.persona.cargoUsuario}"  
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px; width: 100%">
+                            <div style="width: 50%; display:flex; margin-right: 10px">
+                                <div style="width: 30%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_local}" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 70%;">
+                                    <p:outputLabel value="#{usuariosBean.persona.idLocal}" 
+                                                   style="border: 1px solid #ccc; padding: 5px; width:100%; font-size: 14px"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="Cerrar" immediate="true" oncomplete="PF('wdlgVer').hide();"  
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px; font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+
+                <!--Modificar usuario-->
+                <p:dialog header="#{usuariosBean.accion}" widgetVar="wdlgModificar" id="dlgModificar" style='font-size: 14px'
+                          showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form style="margin: 15px; width: 800px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px;">
+                            <h5 style='color: white; padding: 5px; font-size: 14px'>
+                                Modifique la información necesaria del usuario
+                            </h5>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 26%;">
+                                    <p:outputLabel value="#{etq.msj_codigo}:" style="margin-right: 40px; font-size: 14px"
+                                                   for="codigo"/>
+                                </div>
+                                <div style="width: 75%;">
+                                    <p:inputText id="codigo" value="#{usuariosBean.persona.idUsuario}" 
+                                                 style="width:100%; font-size: 14px" disabled="true"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_nombre}" style="margin-right: 40px; font-size: 14px" for="nombre"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="nombre" value="#{usuariosBean.persona.nomUsuario}" 
+                                                 style="width:100%; font-size: 14px" disabled="true"/>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_apellido}:" 
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px" for="apellido"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{usuariosBean.persona.apellUsuario}" style="width:100%; font-size: 14px"
+                                                 id="apellido" disabled="true"/>
+                                </div> 
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_telefono}:" style="margin-right: 40px; font-size: 14px"
+                                                   for="telefono"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText id="telefono" value="#{usuariosBean.persona.teleUsuario}" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Télefono: No digitó un teléfono" 
+                                                 validatorMessage="Télefono: El número de teléfono debe tener 7 digitos"
+                                                 autocomplete="off" converterMessage="Teléfono: Ingrese solo valores númericos">
+                                        <f:validateLength minimum="7" maximum="7"/>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="#{etq.msj_corre}" for="correo"
+                                                   style="margin-right: 33px; margin-left:10px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{usuariosBean.persona.correoUsuario}" id="correo" 
+                                                 style="width:100%; font-size: 14px" required="true"
+                                                 requiredMessage="Correo: No digitó un correo" autocomplete="off" >
+                                        <f:validator validatorId="emailValidator"></f:validator>
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 20px">
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel for="cargo" value="#{etq.msj_cargo}:" style="margin-right: 40px; font-size: 14px"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="cargo" value="#{usuariosBean.persona.cargoUsuario}"
+                                                     style="width:100%; font-size: 14px" required="true" 
+                                                     requiredMessage="Cargo: No seleccionó cargo">
+                                        <f:selectItem itemValue="#{null}" itemLabel="#{etq.msj_seleccione}"/>  
+                                        <f:selectItem itemValue="Administrador" itemLabel="#{etq.msj_admin}"/>
+                                        <f:selectItem itemValue="Empleado" itemLabel="#{etq.msj_empleado}"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                            <div style="width: 50%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel for="local" value="#{etq.msj_local}:" style="margin-right: 40px; font-size: 14px; margin-left:10px;"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="local" value="#{usuariosBean.persona.idLocal}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style='width:100%;' 
+                                                     requiredMessage="Local: No seleccionó local">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione local" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{localesBean.lstLocales}" var="local" 
+                                                       itemLabel="#{local.idLocal}" itemValue="#{local.idLocal}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p:commandButton value="#{usuariosBean.accion}" actionListener="#{usuariosBean.operar()}"
+                                         oncomplete="PF('wdlgModificar').hide();" 
+                                         update=":frm:datos :msj" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  font-weight: lighter;"/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgModificar').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+                <!--Eliminar Producto-->
+                <h:form id="formEliminar">
+                    <p:dialog header="Eliminar registro" widgetVar="wdlgEliminar" id="dlgEliminar" 
+                              style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+                        <div style='display: flex; justify-content: center;'>
+                            <h:outputLabel value="¿Desea eliminar este registro?" style='font-size: 14px'/>
+                        </div>
+                        <div style='display: flex; justify-content: center;'>
+                            <p:commandButton value="SI" actionListener="#{usuariosBean.eliminar()}"
+                                             update=":frm:datos :msj :dlgAdmin" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #28a745; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                            <p:commandButton value="NO" oncomplete="PF('wdlgEliminar').hide();" 
+                                             style='font-size: 14px; background: #d63535; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                        </div>
+                    </p:dialog>  
+                </h:form>
+
+                <!--Agregar codigo_administrador-->
+                <p:dialog header="Asignación código administrador" widgetVar="wdlgDatos2" id="dlgDatos2" 
+                          style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form style="margin: 15px; width: 600px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>
+                                #{etq.msj_formIngreProducInven}
+                            </h5>  
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="Usuario" style="margin-right: 40px; font-size: 14px" for="usuarios"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="usuarios" value="#{administradoresBean.admin.idUsuario}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style='width:100%;' 
+                                                     requiredMessage="No seleccionó usuario">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione usuario" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{usuariosBean.lstPersonas}" var="usuarios" itemLabel="#{usuarios.idUsuario} - #{usuarios.nomUsuario} #{usuarios.apellUsuario}" 
+                                                       itemValue="#{usuarios.idUsuario}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>   
+
+                        <p:commandButton value="#{administradoresBean.accion}" actionListener="#{administradoresBean.operar()}" 
+                                         oncomplete="PF('wdlgDatos2').hide();" update=":frm:datos :msj" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  
+                                         font-weight: lighter; "/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgDatos2').hide(); PF('wdlgDatos').hide();" 
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; 
+                                         font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+
+
+                <!--Tabla de asignacion de administradores-->
+                <p:dialog header="Adminitradores" widgetVar="wdlgAdmin" 
+                          id="dlgAdmin" 
+                          style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form id="formulario">
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>
+                                Información de los administradores
+                            </h5>  
+                        </div>
+                        <p:dataTable id="tabla2" value="#{administradoresBean.lstAdmin}" var="admin" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                     paginator="true" rows="3" 
+                                     style="font-size: 13px; text-align: center; padding: 20px; width:800px">
+
+                            <p:column headerText="Código" footerText="Código">
+                                <p:outputLabel value="#{admin.idAdmin}"/>
+                            </p:column>
+
+                            <p:column headerText="Id Usuario" footerText="Id Usuario">
+                                <p:outputLabel value="#{admin.idUsuario}"/>
+                            </p:column>
+
+                            <p:column headerText="Nombre" footerText="Nombre">
+                                <p:outputLabel value="#{admin.nomUsuario}"/>
+                            </p:column>
+
+                            <p:column headerText="Apellido" footerText="Apellido">
+                                <p:outputLabel value="#{admin.apellUsuario}"/>
+                            </p:column>
+
+                            <p:column headerText="Acciones">
+                                <p:commandLink oncomplete="PF('wdlgEliminar2').show();" update=":formEliminar2">
+                                    <f:setPropertyActionListener target="#{administradoresBean.admin}" value='#{admin}'/>
+                                    <p:graphicImage url="managment/img/close.png" width="12"/>
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:dialog>
+
+                <!--Eliminar admin-->
+                <h:form id="formEliminar2">
+                    <p:dialog header="Eliminar registro" widgetVar="wdlgEliminar2" id="dlgEliminar2" 
+                              style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+                        <div style='display: flex; justify-content: center;'>
+                            <h:outputLabel value="¿Desea eliminar este registro?" style='font-size: 14px'/>
+                        </div>
+                        <div style='display: flex; justify-content: center;'>
+                            <p:commandButton value="SI" actionListener="#{administradoresBean.eliminar()}"
+                                             update=":formulario:tabla2 :msj" oncomplete="PF('wdlgEliminar2').hide();" 
+                                             style='font-size: 14px; background: #28a745; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                            <p:commandButton value="NO" oncomplete="PF('wdlgEliminar2').hide();" 
+                                             style='font-size: 14px; background: #d63535; color: #fff; font-family:lighter; font-family: Roboto, sans-serif'/> 
+                        </div>
+                    </p:dialog>  
+                </h:form>
+
+                <!--Asignar contraseña-->
+                <p:dialog header="Generar Uusario y contraseña" widgetVar="wdlgContraseña" id="dlgContraseña" 
+                          style='font-size: 14px' showEffect="explode" hideEffect="explode" modal="true">
+
+                    <h:form style="margin: 15px; width: 500px; font-family: Roboto, sans-serif">
+
+                        <div style="display:flex; width: 100%; background-color: #549abb; margin-bottom: 20px; ">
+                            <h5 style='color: white; padding: 10px; font-size: 14px'>
+                                #{etq.msj_formIngreProducInven}
+                            </h5>  
+                        </div>
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="Usuario Registrado" style="margin-right: 40px; font-size: 14px" for="usuarios"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="usuarios" value="#{usu_contraBean.usu.usuario}"
+                                                     converter="omnifaces.SelectItemsConverter" required="true" style='width:100%;' 
+                                                     requiredMessage="No seleccionó usuario">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione usuario" itemValue="#{null}"/>  
+                                        <f:selectItems value="#{usuariosBean.lstPersonas}" var="usuarios" itemLabel="#{usuarios.idUsuario} - #{usuarios.nomUsuario} #{usuarios.apellUsuario} (#{usuarios.cargoUsuario})" 
+                                                       itemValue="#{usuarios.idUsuario}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="Usuario" style="margin-right: 40px; font-size: 14px" for="usua"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{usu_contraBean.usu.usu}" style="width:100%; font-size: 14px"
+                                                 id="usua" />
+                                </div>
+                            </div>
+                        </div>  
+
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="Contraseña" style="margin-right: 40px; font-size: 14px" for="contra"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:inputText value="#{usu_contraBean.usu.contra}" style="width:100%; font-size: 14px"
+                                                 id="contra"/>
+                                </div>
+                            </div>
+                        </div> 
+
+
+                        <div style="display:flex; margin-bottom: 30px">
+                            <div style="width: 100%; display:flex;">
+                                <div style="width: 50%; margin-right: 10px">
+                                    <p:outputLabel value="Tipo de usuario" style="margin-right: 40px; font-size: 14px" for="tipo"/>
+                                </div>
+                                <div style="width: 50%;">
+                                    <p:selectOneMenu id="tipo" value="#{usu_contraBean.usu.tipo_usu}"
+                                                     required="true" style="width:100%; font-size: 14px" 
+                                                     requiredMessage="Tipo de usuario: No seleccionó tipo de usuario">
+                                        <f:selectItem itemValue="#{null}" itemLabel="#{etq.msj_seleccione}"/>  
+                                        <f:selectItem itemValue="Ad" itemLabel="#{etq.msj_admin}"/>
+                                        <f:selectItem itemValue="Em" itemLabel="#{etq.msj_empleado}"/>
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                        </div> 
+
+                        <p:commandButton value="Guardar usuario y contraseña" actionListener="#{usu_contraBean.operar()}" 
+                                         oncomplete="PF('wdlgContraseña').hide();" update=":msj" 
+                                         style="background: #28a745; color: #fff; margin-right: 20px; font-size: 14px;  
+                                         font-weight: lighter; "/>
+
+                        <p:commandButton value="#{etq.msj_cancelar}" immediate="true" oncomplete="PF('wdlgContraseña').hide();"
+                                         style="background: #d63535; color: #fff; margin-right: 20px; font-size: 14px; 
+                                         font-weight: lighter; "/>
+                    </h:form>
+                </p:dialog>
+            </div>
+        </section>
+        <script src="managment/js/jquery.js"></script>
+    </h:body>
+</html>

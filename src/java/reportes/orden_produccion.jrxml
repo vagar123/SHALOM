@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="90493969-42fd-4b8f-9e09-946e3d971915">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="idOrden_produccion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select ordenes_produccion.*, satelites.nomSatelite, cotizaciones_fichas.productoCotizacion_ficha
+from satelites inner join ordenes_produccion
+on satelites.idSatelite = ordenes_produccion.idSatelite
+inner join cotizaciones_fichas
+on ordenes_produccion.idCotizacion_ficha = cotizaciones_fichas.idCotizacion_ficha
+where ordenes_produccion.idOrden_produccion = $P{idOrden_produccion};]]>
+	</queryString>
+	<field name="idOrden_produccion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave primaria de la tabla ordenes de producción, esta identifica las ordenes de producción que son generadas en el sistema de información.]]></fieldDescription>
+	</field>
+	<field name="productoOrden_produccion" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al producto que se va a producir.]]></fieldDescription>
+	</field>
+	<field name="fechaOrden_produccion" class="java.sql.Date">
+		<fieldDescription><![CDATA[Hace referencia a la fecha (año, mes, dia) en que se realiza la orden de producción.]]></fieldDescription>
+	</field>
+	<field name="generoProdOrden_produccion" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a que género (Femenino o Masculino) vaya dirigido el producto.]]></fieldDescription>
+	</field>
+	<field name="tallaOrden_produccion" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a la talla o el tamaño del producto (XS, S, M, L, XL).]]></fieldDescription>
+	</field>
+	<field name="cantidadOrden_produccion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Hace referencia a la cantidad que se realizará del producto.]]></fieldDescription>
+	</field>
+	<field name="colorOrden_produccion" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al color que tendrá el producto.]]></fieldDescription>
+	</field>
+	<field name="valorUnitarioOrden_produccion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Hace referencia al valor o precio de cada producto.]]></fieldDescription>
+	</field>
+	<field name="descuentoOrden_produccion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Hace referencia al descuento que se puede dar en el producto.]]></fieldDescription>
+	</field>
+	<field name="valorTotalOrden_produccion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Hace referencia a la sumatoria total de todos los producto a realizar, es decir el costo de la producción.]]></fieldDescription>
+	</field>
+	<field name="categoriaOrden_produccion" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a la categoria a la que puede pertener el producto, que puede ser uniformes, dotaciones, formal o informal.]]></fieldDescription>
+	</field>
+	<field name="descriOrden_produccion" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia a una descripción corta del producto, donde se puede mencionar las características que puede tener el producto.]]></fieldDescription>
+	</field>
+	<field name="idSatelite" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave foránea de la tabla ordenes de producción, hace referencia al número que identifica al satélite dentro del sistema de información y además sera el encargado de ejecutar la producción.]]></fieldDescription>
+	</field>
+	<field name="idCotizacion_ficha" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Clave foránea de la tabla ordenes de producción, hace referencia a la identificación única de la cotización en cuanto a la producción, que da el inicio y evalua la producción a realizar.]]></fieldDescription>
+	</field>
+	<field name="nomSatelite" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al nombre del satélite.]]></fieldDescription>
+	</field>
+	<field name="productoCotizacion_ficha" class="java.lang.String">
+		<fieldDescription><![CDATA[Hace referencia al producto que se vaya a cotizar y que posteriormente se producirá.]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="284" height="33" uuid="a687f0be-ff8a-4742-b2ea-4e4a0a92249b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Orden de producción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="92" y="46" width="192" height="22" uuid="2c08e5fe-3567-4c1c-9b4e-8ed7dda9bcdd"/>
+				<text><![CDATA[Nro° ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="142" y="46" width="142" height="22" uuid="eb9ef18d-0da7-4d48-8ed2-f329d106a7e0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="310" y="0" width="245" height="68" uuid="0fb90052-c506-4447-9234-acebf563a683"/>
+				<imageExpression><![CDATA["C:\\Users\\User\\Documents\\Sena\\Vanessa\\Proyecto\\Shalom Codificacion\\SHALOM\\web\\managment\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="188" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="172" width="555" height="1" uuid="c8da77df-bc09-457f-bde3-3aaeca983190"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="298" y="6" width="135" height="25" uuid="45677b00-8077-4c50-b329-2bfb26e9b3e7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="298" y="31" width="135" height="25" uuid="4fddb2bb-50e6-491f-957e-9225deab050f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[ID Satélite]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="298" y="56" width="135" height="25" uuid="9492d4b1-fbe3-4b88-aac8-8a405e512661"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Satélite]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="234" y="172" width="58" height="16" uuid="f65a1d55-e12d-4624-9871-39048f18522d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Género]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="292" y="172" width="38" height="16" uuid="d798e94b-39c1-49ff-b26f-ad482ef57add"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Talla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="423" y="172" width="53" height="16" uuid="c56b0561-f427-4127-8b85-a0c1911e0013"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Valor U.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="476" y="172" width="79" height="15" uuid="e90145ca-c8ee-47f0-833e-a936fa350edb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Descuento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="298" y="131" width="135" height="25" forecolor="#3399FF" uuid="2f94ad11-6231-4bbc-b617-fcc8dcc9237b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de venta ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="173" width="160" height="15" uuid="6d4cf75c-76d2-4f6c-a99f-f128c8be1b9b"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="160" y="173" width="74" height="15" uuid="a2be5ea6-121c-40b0-8ef0-475a39c162f8"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="6" width="130" height="25" uuid="7dd9bc5e-804c-43dd-8253-493fc5306df9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Bogotá, Colombia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="31" width="130" height="25" uuid="ab3daa40-2ecd-4103-b6dc-067aaacac227"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Carrera 13 # 64 - 14]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="130" height="25" uuid="ea5806f6-dee1-48d8-9426-848c0ed8e42d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[NF: 1030320983202]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="81" width="234" height="25" uuid="c8d1b415-ba0c-4fc6-addb-204a3fcaa4c9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tef: 2113568 | 3209985162 | 3204518804]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="106" width="195" height="25" uuid="c59f5d39-937f-4091-9b91-340e35bf3474"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[http://www.shalom.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="131" width="195" height="25" uuid="ced22075-6b64-43eb-91f8-a53ae78706a8"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[shalommcolombia@gmail.com]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="31" width="120" height="25" uuid="5cd32b11-3266-4976-9f1b-89e855a380ef"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idSatelite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="56" width="120" height="25" uuid="6aec8d4d-2968-4b1b-9a2d-a5e575bba0f5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomSatelite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="6" width="120" height="25" uuid="44fc894a-dee4-4354-ac9b-0d5aac000717"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="298" y="81" width="135" height="25" uuid="d06a75a0-4bf9-4412-8006-ea9a845b2134"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Cotización de producción]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="81" width="120" height="25" uuid="c5172294-2da7-4707-ba0b-7cf3db622d59"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idCotizacion_ficha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="298" y="106" width="135" height="25" uuid="20a8ecb9-c928-4962-aee6-619dd741b063"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="106" width="120" height="25" uuid="166e5989-e8d3-47b9-8826-0f13e5880aef"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{productoOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="131" width="120" height="25" uuid="e071b0a9-3ba5-4d2f-8aa4-8590d427bcd4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorTotalOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="330" y="172" width="46" height="16" uuid="66613bdd-06cc-43f4-8223-9a5b918975bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="376" y="172" width="47" height="16" uuid="b66609c3-5fce-4dac-bd65-a608d0f20aac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Color]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1" uuid="8fd8d754-c4d1-4707-994e-3f822868c13b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="1" width="160" height="26" uuid="211aac6d-86dc-4f41-8ba5-f81814530611"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descriOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="1" width="74" height="26" uuid="1b4820d4-1ddb-43a8-ad5c-bdb786aac85d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{categoriaOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="1" width="58" height="26" uuid="c6a000f7-1418-4dca-89a9-61c1f9728f8b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{generoProdOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="0" width="38" height="27" uuid="8ee46d71-15b9-4f87-9fef-85f573bfaf78"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tallaOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="1" width="46" height="26" uuid="82602af9-5101-4f4b-b81c-ffaa29a5d8fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidadOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="1" width="47" height="26" uuid="144fd652-c9a9-4d2c-9c44-c9d06afe5eac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{colorOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="423" y="0" width="53" height="27" uuid="931bcde4-1834-44f1-b0ec-5262dbed21cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorUnitarioOrden_produccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="1" width="77" height="26" uuid="28471a42-bdc4-4c95-a04e-bccb5285e3ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{descuentoOrden_produccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="d06ed9d7-5619-4e20-bf3d-6b5b45a92ab4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="87475ff1-18c0-47b6-b368-1d78f244545f"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="2f249c4e-f159-4bc8-852e-04918ccf3b15"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="c185ce29-ee0a-4406-881b-41890fa4607f"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

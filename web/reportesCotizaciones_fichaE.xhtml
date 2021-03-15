@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{etq.msj_reports}</title>   
+        <link rel="shortcut icon" href="managment/img/logo2.png" type="image/x-icon" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300&amp;family=Nanum+Gothic&amp;display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+        <link rel="stylesheet" href="./managment/css/estiloProducto.css" />    
+    </h:head>
+    <h:body>
+        
+        <f:event type="preRenderView" listener="#{ingreso.verificarEmpleado()}"/>
+        <f:event type="preRenderView" listener="#{ingreso.usuariosDatos(false)}"/>
+        
+        <!--Encabezado con el logo que aparece cuando es responsive-->
+        <section id="logoo" style="text-align: center; background: rgb(255 255 255); border-bottom: 1px solid #dcdcdc; padding-top: 8px; padding-bottom: 8px;">
+            <img src="managment/img/logo.png" alt="" width="200" />
+        </section>      
+        
+        <!--Muestra del menú cuando es responsive-->
+        <section>
+            <div class="contenedor-menu2">
+                <ul class="menu2">
+                    <li><a href="#">
+                            <i class="fas fa-bars" style="margin-right: 20px;" />
+                            #{etq.msj_menu}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="empleado.xhtml"><i class="fas fa-home mr-2"></i>#{etq.msj_inicio}</a></li>
+                            <li><a href="inventariosE.xhtml"><i class="fas fa-folder mr-2"></i>#{etq.msj_inven}</a></li>
+                            <li><a href="fichas_produccionE.xhtml"><i class="fas fa-file-invoice mr-2"></i>#{etq.msj_fichaP}</a></li>
+                            <li><a href="satelitesE.xhtml"><i class="fas fa-industry mr-2"></i>#{etq.msj_satelite}</a></li>
+                            <li><a href="proveedoresE.xhtml"><i class="fas fa-truck-moving mr-2"></i>#{etq.msj_prov}</a></li>
+                            <li><a href="ordenes_produccionE.xhtml"><i class="fas fa-file-signature mr-2"></i>#{etq.msj_ordenProdu}</a></li>
+                            <li><a href="cotizacion_fichaE.xhtml"><i class="fas fa-file-invoice-dollar mr-2"></i>#{etq.msj_cotizaP}</a></li>
+                            <li><a href="ordenes_pagoE.xhtml"><i class="fas fa-dollar-sign mr-2"></i>#{etq.msj_ordenPago}</a></li>
+                            <li><a href="cotizacionE.xhtml"><i class="fas fa-money-check-alt mr-2"></i>#{etq.msj_cotiza}</a></li>
+                            <li><a href="clientesE.xhtml"><i class="fas fa-users mr-2"></i>#{etq.msj_clientes}</a></li>
+                            <li><h:form>
+                                    <h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                                        <i class="fas fa-power-off" style="margin-right: 13px"></i>#{etq.msj_cerrar}
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--Inicio del panel izquierdo, usando menú y submenu con Jquery-->
+
+
+        <section id="panel" style="height: 1600px !important">
+            <div style="display: flex; justify-content: center; padding: 2px; border-bottom: 1px solid #e1e1e1;">
+                <img src="managment/img/logo.png" alt="logo" width="165" id="logo" /> 
+            </div>
+            <div class="contenedor-menu">
+                <ul class="menu2">                  
+                    <div class="sb-sidenav-menu-heading">Producción</div>
+                    <li>
+                        <a href="cotizaciones_fichaE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                                #{etq.msj_cotizaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="ordenes_produccionE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                #{etq.msj_ordenProdu}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="fichas_produccionE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
+                                #{etq.msj_fichaP}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="satelitesE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-industry"></i></div>
+                                #{etq.msj_satelite}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="proveedoresE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck-moving"></i></div>
+                                #{etq.msj_prov}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Inventario</div>
+                    <li>
+                        <a href="inventariosE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                #{etq.msj_inven}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productosE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tshirt"></i></div>
+                                #{etq.msj_product}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="insumosE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cut"></i></div>
+                                #{etq.msj_insumos}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Ventas</div>
+                    <li>
+                        <a href="ordenes_pagoE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-dollar-sign"></i></div>
+                                #{etq.msj_ordenPago}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cotizacionE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                                #{etq.msj_cotiza}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="clientesE.xhtml">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                #{etq.msj_clientes}
+                        </a>
+                    </li>
+                    <div class="sb-sidenav-menu-heading">Otros</div>
+                    <li>
+                        <a href="#">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                #{etq.msj_reports}
+                            <i class="icono derecha fa fa-chevron-down" />
+                        </a>
+                        <ul>
+                            <li><a href="reportesInventariosE.xhtml">#{etq.msj_r1}</a></li>
+                            <li><a href="reportesProductosE.xhtml">#{etq.msj_r2}</a></li>
+                            <li><a href="reportesFichasE.xhtml">#{etq.msj_r3}</a></li>
+                            <li><a href="reportesCotizaciones_fichaE.xhtml">#{etq.msj_r4}</a> </li>
+                            <li><a href="reportesOrdenes_pagoE.xhtml">#{etq.msj_r5}</a></li>
+                            <li><a href="reportesCotizacionesE.xhtml">#{etq.msj_r6}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!--Encabezado simple-->
+        <header id="Encabezado">        
+            <h:form><h:commandLink action="index?faces-redirect=true" actionListener="#{ingreso.cerrarSesion()}">
+                    <i class="fas fa-power-off"></i></h:commandLink>
+            </h:form>
+            <a href="empleado.xhtml"><i class="fas fa-home"></i></a>
+            <a href="cotizaciones_fichaE.xhtml"><i class="fas fa-long-arrow-alt-left"></i></a>
+            <a href="">#{etq.msj_empleado} #{ingreso.usuar.nomUsuario} #{ingreso.usuar.apellUsuario}</a>
+        </header>
+
+        <!--Segunda barra con titulo-->
+        <section id="barra2">
+            <div><h4 id="componente">#{etq.msj_reports}</h4></div> 
+        </section>
+
+
+        <!--Tercera barra con titulo-->
+        <section id="barra3">
+            <div>
+                <h4 id="subtitulo">Bienvenido  a los reportes, aquí podrá generar reportes de las cotizaciones de producción de manera estadistica en gráficas o en distintos formatos.</h4>
+            </div>
+        </section>
+
+        <section id="cuerpo1" style="background: #ffffff !important; border: 1px solid #ccc !important;">
+            <div>
+                <f:event type="preRenderView" listener="#{satelitesBean.listar(false)}"/> 
+                <f:event type="preRenderView" listener="#{ordenes_produccionBean.listar(false)}"/>
+                
+                <p:growl id="msj" sticky="true"/>   
+
+                <div style="width: 100%; background: #549abb; color: #ffffff; padding-top:5px; padding-left:4px;">
+                    <p style="font-size: 17px; font-family: 'Mukta';">Reportes en formato</p>
+                </div>
+
+                <h1 style="font-size: 18px; font-family: 'Mukta'; color: #818188; font-weight: 500; margin-left: 20px;">
+                    Reportes disponibles
+                </h1>
+
+
+                <h:form style="margin-top: 30px; border-top: 1px solid #ccc; padding: 20px;">
+                    <p:outputLabel value="Reporte que muestra las cotizaciones a cargo de un satélite en especifico y producto, por favor seleccione el satélite y producto:" style="font-size: 15px; margin-right: 20px"/>
+                    <br/>
+
+                    <h:selectOneMenu value="#{cotizaciones_FichaReportes.idSatelite}" style="margin-right: 10px; 
+                                     border: 1px solid #ccc; padding: 5px; font-family: Arial,sans-serif; 
+                                     font-size: 14px; margin-top: 10px; width: 325px; color:#5F6264;" required="true"
+                                     requiredMessage="No seleccionó satélite">
+                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione satélite" itemValue="#{null}"/>
+                        <f:selectItems value="#{satelitesBean.lstSatelites}" var="satelite" 
+                                       itemLabel="#{satelite.idSatelite} - #{satelite.nomSatelite}" 
+                                       itemValue="#{satelite.idSatelite}"/>
+                    </h:selectOneMenu>
+
+                    <h:selectOneMenu value="#{cotizaciones_FichaReportes.productoCotizacion_ficha}" style="margin-right: 10px; 
+                                     border: 1px solid #ccc; padding: 5px; font-family: Arial,sans-serif; font-size: 14px; 
+                                     margin-top: 10px; width: 325px; color:#5F6264;" required="true" 
+                                     requiredMessage="No seleccionó producto">
+                        <f:selectItem itemValue="#{null}" itemLabel="Seleccionar producto"/>
+                        <f:selectItem itemValue="Camisa" itemLabel="Camisa"/>
+                        <f:selectItem itemValue="Uniforme diario" itemLabel="Uniforme diario"/>
+                        <f:selectItem itemValue="Pantalon formal" itemLabel="Pantalon formal"/>
+                        <f:selectItem itemValue="Chaqueta" itemLabel="Chaqueta"/>
+                        <f:selectItem itemValue="Traje formal" itemLabel="Traje formal"/>
+                        <f:selectItem itemValue="Blazer" itemLabel="Blazer"/>
+                        <f:selectItem itemValue="Vestido" itemLabel="Vestido"/>
+                        <f:selectItem itemValue="Bata maestro" itemLabel="Bata maestro"/>
+                        <f:selectItem itemValue="Oberol" itemLabel="Oberol"/>
+                        <f:selectItem itemValue="Pantalon jean" itemLabel="Pantalon jean"/>
+                        <f:selectItem itemValue="Falda formal" itemLabel="Falda formal"/>
+                        <f:selectItem itemValue="Sudadera" itemLabel="Sudadera"/>
+                        <f:selectItem itemValue="Pantalon sudadera" itemLabel="Pantalon sudadera"/>
+                        <f:selectItem itemValue="Corbata" itemLabel="Corbata"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton ajax="false" id="reporte1" value="Pdf" actionListener="#{cotizaciones_FichaReportes.verReportePdf()}" style="margin-right: 10px; width:50px; font-size: 13px; background: #DE1A11; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte2" value="Excel" actionListener="#{cotizaciones_FichaReportes.verReporteExcel()}" style="margin-right: 10px; width:60px; font-size: 13px; background: #1FB418; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte3" value="Word" actionListener="#{cotizaciones_FichaReportes.verReporteWord()}" style="margin-right: 10px; width:60px; font-size: 13px; background: #1872B4; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte4" value="PPT" actionListener="#{cotizaciones_FichaReportes.verReportePpt()}" style="margin-right: 10px; width:50px; font-size: 13px; background: #F67313; color: #fff;" update=":msj"/>
+                </h:form>
+
+                <h:form style="margin-top: 30px; border-top: 1px solid #ccc; padding: 20px;">
+                    <p:outputLabel value="Reporte que muestra las cotizaciones a cargo de un satélite en especifico, por favor seleccione el satélite:" style="font-size: 15px; margin-right: 20px"/>
+                    <br/>
+
+                    <h:selectOneMenu value="#{cotizaciones_FichaReportes2.idSatelite}" style="margin-right: 10px; 
+                                     border: 1px solid #ccc; padding: 5px; font-family: Arial,sans-serif; 
+                                     font-size: 14px; margin-top: 10px; width: 660px; color:#5F6264;" required="true" 
+                                     requiredMessage="No seleccionó satélite">
+                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione satélite" itemValue="#{null}"/>
+                        <f:selectItems value="#{satelitesBean.lstSatelites}" var="satelite" itemLabel="#{satelite.idSatelite} - #{satelite.nomSatelite}" itemValue="#{satelite.idSatelite}"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton ajax="false" id="reporte1" value="Pdf" actionListener="#{cotizaciones_FichaReportes2.verReportePdf()}" style="margin-right: 10px; width:50px; font-size: 13px; background: #DE1A11; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte2" value="Excel" actionListener="#{cotizaciones_FichaReportes2.verReporteExcel()}" style="margin-right: 10px; width:60px; font-size: 13px; background: #1FB418; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte3" value="Word" actionListener="#{cotizaciones_FichaReportes2.verReporteWord()}" style="margin-right: 10px; width:60px; font-size: 13px; background: #1872B4; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte4" value="PPT" actionListener="#{cotizaciones_FichaReportes2.verReportePpt()}" style="margin-right: 10px; width:50px; font-size: 13px; background: #F67313; color: #fff;" update=":msj"/> 
+                </h:form>
+
+                <h:form style="margin-top: 30px; border-top: 1px solid #ccc; padding: 20px;">
+                    <p:outputLabel value="Reporte que muestra las cotizaciones a cargo de un producto, por favor seleccione el producto:" style="font-size: 15px; margin-right: 20px"/>
+                    <br/>
+                    <h:selectOneMenu value="#{cotizaciones_FichaReportes3.productoCotizacion_ficha}" 
+                                     style="margin-right: 10px; border: 1px solid #ccc; padding: 5px; 
+                                     font-family: Arial,sans-serif; font-size: 14px; margin-top: 10px; 
+                                     width: 660px; color:#5F6264;" required="true" requiredMessage="No seleccionó producto">
+                        <f:selectItem itemValue="#{null}" itemLabel="Seleccionar producto"/>
+                        <f:selectItem itemValue="Camisa" itemLabel="Camisa"/>
+                        <f:selectItem itemValue="Uniforme diario" itemLabel="Uniforme diario"/>
+                        <f:selectItem itemValue="Pantalon formal" itemLabel="Pantalon formal"/>
+                        <f:selectItem itemValue="Chaqueta" itemLabel="Chaqueta"/>
+                        <f:selectItem itemValue="Traje formal" itemLabel="Traje formal"/>
+                        <f:selectItem itemValue="Blazer" itemLabel="Blazer"/>
+                        <f:selectItem itemValue="Vestido" itemLabel="Vestido"/>
+                        <f:selectItem itemValue="Bata maestro" itemLabel="Bata maestro"/>
+                        <f:selectItem itemValue="Oberol" itemLabel="Oberol"/>
+                        <f:selectItem itemValue="Pantalon jean" itemLabel="Pantalon jean"/>
+                        <f:selectItem itemValue="Falda formal" itemLabel="Falda formal"/>
+                        <f:selectItem itemValue="Sudadera" itemLabel="Sudadera"/>
+                        <f:selectItem itemValue="Pantalon sudadera" itemLabel="Pantalon sudadera"/>
+                        <f:selectItem itemValue="Corbata" itemLabel="Corbata"/>
+                    </h:selectOneMenu>
+
+                    <p:commandButton ajax="false" id="reporte1" value="Pdf" actionListener="#{cotizaciones_FichaReportes3.verReportePdf()}" style="margin-right: 10px; width:50px; font-size: 13px; background: #DE1A11; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte2" value="Excel" actionListener="#{cotizaciones_FichaReportes3.verReporteExcel()}" style="margin-right: 10px; width:60px; font-size: 13px; background: #1FB418; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte3" value="Word" actionListener="#{cotizaciones_FichaReportes3.verReporteWord()}" style="margin-right: 10px; width:60px; font-size: 13px; background: #1872B4; color: #fff;" update=":msj"/>
+                    <p:commandButton ajax="false" id="reporte4" value="PPT" actionListener="#{cotizaciones_FichaReportes3.verReportePpt()}" style="margin-right: 10px; width:50px; font-size: 13px; background: #F67313; color: #fff;" update=":msj"/>
+                </h:form>
+            </div>
+        </section>
+        <script src="managment/js/jquery.js"></script>
+    </h:body>
+</html>
